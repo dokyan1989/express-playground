@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const makeCallback = require('../../express-callback');
+const makeCallback = require('../../helpers/express-callback');
 const {
   createHero,
   updateHero,
