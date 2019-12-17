@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "cuid": "^2.1.8",
+    "express": "^4.17.1",
+    "ip-regex": "^4.1.0",
+    "sanitize-html": "^1.20.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"
