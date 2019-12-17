@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const makeCallback = require('../../express-callback');
+const {
+  createHero,
+  updateHero,
+  deleteHero,
+  getHeroes
+} = require('../../controllers/hero');
 const HEROES = require('../../mock/Heroes');
 
 // Get all heroes
-router.get('/', (req, res) => {
-  res.json(HEROES);
-});
+router.get('/', makeCallback(getHeroes));
 
 // Get single hero
 router.get('/:id', (req, res) => {
