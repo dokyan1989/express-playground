@@ -1,7 +1,7 @@
 const makeComment = require('../../entities/comment');
 
-module.exports = function makeEditComment({ commentsDb, handleModeration }) {
-  return async function editComment({ id, ...changes } = {}) {
+module.exports = function makeEditComment ({ commentsDb, handleModeration }) {
+  return async function editComment ({ id, ...changes } = {}) {
     if (!id) {
       throw new Error('You must supply an id.');
     }
@@ -12,7 +12,7 @@ module.exports = function makeEditComment({ commentsDb, handleModeration }) {
 
     const existing = await commentsDb.findById({ id });
     if (!existing) {
-      throw new Error('Comment not found.')
+      throw new Error('Comment not found.');
     }
 
     const comment = makeComment({ ...existing, ...changes, modifiedOn: null });
@@ -30,4 +30,4 @@ module.exports = function makeEditComment({ commentsDb, handleModeration }) {
     });
     return { ...existing, ...updated };
   };
-}
+};

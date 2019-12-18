@@ -1,5 +1,5 @@
-module.exports = function makeUpdateHero({ editHero }) {
-  return async function updateHero(httpRequest) {
+module.exports = function makeUpdateHero ({ editHero }) {
+  return async function updateHero (httpRequest) {
     try {
       const { name } = httpRequest.body;
       const toEdit = {
@@ -17,7 +17,7 @@ module.exports = function makeUpdateHero({ editHero }) {
       };
     } catch (e) {
       console.log(e);
-      if(e.name === 'RangeError') {
+      if (e.name === 'RangeError') {
         return {
           headers: {
             'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ module.exports = function makeUpdateHero({ editHero }) {
           body: {
             error: e.message
           }
-        }
+        };
       }
       return {
         headers: {

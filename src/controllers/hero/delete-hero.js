@@ -1,5 +1,5 @@
-module.exports = function makeDeleteHero({ removeHero }) {
-  return async function deleteHero(httpRequest) {
+module.exports = function makeDeleteHero ({ removeHero }) {
+  return async function deleteHero (httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     };

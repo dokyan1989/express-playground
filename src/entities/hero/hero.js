@@ -1,5 +1,5 @@
-module.exports = function buildMakeHero() {
-  return function makeHero({ name } = {}) {
+module.exports = function buildMakeHero () {
+  return function makeHero ({ name } = {}) {
     if (!name) {
       throw new Error('Hero must have a name.');
     }
@@ -7,4 +7,4 @@ module.exports = function buildMakeHero() {
       getName: () => name
     });
   };
-}
+};

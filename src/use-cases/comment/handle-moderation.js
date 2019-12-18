@@ -1,8 +1,8 @@
-module.exports = function makeHandleModeration({
+module.exports = function makeHandleModeration ({
   isQuestionable,
   initiateReview
 }) {
-  return async function handleModeration({ comment }) {
+  return async function handleModeration ({ comment }) {
     const shouldModerate = await isQuestionable({
       text: comment.getText(),
       ip: comment.getSource().getIp(),
@@ -20,5 +20,5 @@ module.exports = function makeHandleModeration({
       moderated.publish();
     }
     return moderated;
-  }
+  };
 }

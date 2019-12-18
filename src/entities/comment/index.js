@@ -10,18 +10,18 @@ const makeComment = buildMakeComment({ Id, md5, sanitize, makeSource });
 
 module.exports = makeComment;
 
-function isValidIp(ip) {
+function isValidIp (ip) {
   return ipRegex({ exact: true }).test(ip);
 }
 
-function md5(text) {
+function md5 (text) {
   return crypto
     .createHash('md5')
     .update(text, 'utf-8')
     .digest('hex');
 }
 
-function sanitize(text) {
+function sanitize (text) {
   return sanitizeHtml(text, {
     allowedIframeHostnames: ['codesandbox.io', 'repl.it']
   });

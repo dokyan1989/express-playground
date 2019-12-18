@@ -1,4 +1,4 @@
-module.exports = async function notFound() {
+module.exports = async function notFound () {
   return {
     headers: {
       'Content-Type': 'application/json'

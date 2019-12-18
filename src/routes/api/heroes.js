@@ -12,7 +12,7 @@ const {
 router.get('/', makeCallback(getHeroes));
 router.get('/:id', makeCallback(getHeroById));
 router.post('/', makeCallback(createHero));
-router.put('/:id',makeCallback(updateHero));
-router.delete('/:id',makeCallback(deleteHero));
+router.put('/:id', makeCallback(updateHero));
+router.delete('/:id', makeCallback(deleteHero));
 
 module.exports = router;

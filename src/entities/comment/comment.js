@@ -1,5 +1,5 @@
-module.exports = function buildMakeComment({ Id, md5, sanitize, makeSource }) {
-  return function makeComment({
+module.exports = function buildMakeComment ({ Id, md5, sanitize, makeSource }) {
+  return function makeComment ({
     author,
     createdOn = Date.now(),
     id = Id.makeId(),
@@ -27,7 +27,7 @@ module.exports = function buildMakeComment({ Id, md5, sanitize, makeSource }) {
     }
 
     if (!text || text.length < 1) {
-      throw new Error('Comment must include at least one character of text.')
+      throw new Error('Comment must include at least one character of text.');
     }
 
     if (!source) {
@@ -71,7 +71,7 @@ module.exports = function buildMakeComment({ Id, md5, sanitize, makeSource }) {
       }
     });
 
-    function makeHash() {
+    function makeHash () {
       return md5(sanitizedText + published + (author || '') + (postId || '') + (replyToId || ''));
     }
   };

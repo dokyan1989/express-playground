@@ -1,5 +1,5 @@
-module.exports = function makeFindHeroById({ heroesDb }) {
-  return async function findHeroById({ id }) {
+module.exports = function makeFindHeroById ({ heroesDb }) {
+  return async function findHeroById ({ id }) {
     const hero = await heroesDb.findById({ id });
 
     if (!hero) {

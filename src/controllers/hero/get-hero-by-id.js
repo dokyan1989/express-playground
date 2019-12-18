@@ -1,5 +1,5 @@
-module.exports = function makeGetHeroById({ findHeroById }) {
-  return async function getHeroes(httpRequest) {
+module.exports = function makeGetHeroById ({ findHeroById }) {
+  return async function getHeroes (httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     };

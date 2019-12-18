@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const port = 3000;
 
 const notFound = require('./controllers/not-found');
@@ -16,9 +16,11 @@ app.use(cors(corsOptions));
 
 // Body Parser Middleware
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false
+  })
+);
 
 app.use('/', require('./routes/pages'));
 app.use('/api', require('./routes/api'));

@@ -1,6 +1,10 @@
-# debug
+# vscode file
 .vscode
 
 # dependencies
 /node_modules
+
+# dotenv environment variables file
+.env
+
 

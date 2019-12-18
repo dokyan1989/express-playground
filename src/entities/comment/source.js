@@ -1,5 +1,5 @@
-module.exports = function buildMakeSource({ isValidIp }) {
-  return function makeSource({ ip, browser, referrer } = {}) {
+module.exports = function buildMakeSource ({ isValidIp }) {
+  return function makeSource ({ ip, browser, referrer } = {}) {
     if (!ip) {
       throw new Error('Comment source must contain an IP.');
     }
@@ -12,6 +12,6 @@ module.exports = function buildMakeSource({ isValidIp }) {
       getIp: () => ip,
       getBrowser: () => browser,
       getReferrer: () => referrer
-    })
-  }
-}
+    });
+  };
+};

@@ -1,6 +1,5 @@
-module.exports = function makeExpressCallback(controller) {
+module.exports = function makeExpressCallback (controller) {
   return (req, res) => {
-   
     const httpRequest = {
       body: req.body,
       query: req.query,
@@ -14,7 +13,7 @@ module.exports = function makeExpressCallback(controller) {
         'User-Agent': req.get('User-Agent')
       }
     };
-    
+
     controller(httpRequest)
       .then(httpResponse => {
         if (httpResponse.headers) {

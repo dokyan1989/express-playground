@@ -1,7 +1,7 @@
 const makeHero = require('../../entities/hero');
 
-module.exports = function makeEditHero({ heroesDb }) {
-  return async function editHero({ id, name } = {}) {
+module.exports = function makeEditHero ({ heroesDb }) {
+  return async function editHero ({ id, name } = {}) {
     if (!id) {
       throw new Error('You must supply an id.');
     }

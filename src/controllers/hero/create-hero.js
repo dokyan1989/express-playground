@@ -1,5 +1,5 @@
-module.exports = function makeCreateHero({ addHero }) {
-  return async function createHero(httpRequest) {
+module.exports = function makeCreateHero ({ addHero }) {
+  return async function createHero (httpRequest) {
     try {
       const { name } = httpRequest.body;
       const posted = await addHero({ name });

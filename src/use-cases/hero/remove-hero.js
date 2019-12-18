@@ -1,7 +1,5 @@
-const makeHero = require('../../entities/hero');
-
-module.exports = function makeRemoveHero({ heroesDb }) {
-  return async function removeHero({ id } = {}) {
+module.exports = function makeRemoveHero ({ heroesDb }) {
+  return async function removeHero ({ id } = {}) {
     if (!id) {
       throw new Error('You must supply a hero id.');
     }
@@ -19,7 +17,7 @@ module.exports = function makeRemoveHero({ heroesDb }) {
     };
   };
 
-  function deleteNothing() {
+  function deleteNothing () {
     return {
       deletedCount: 0,
       message: 'Comment not found, nothing to delete.'
