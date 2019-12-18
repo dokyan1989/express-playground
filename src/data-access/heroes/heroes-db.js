@@ -24,7 +24,7 @@ module.exports = function makeHeroesDb({ makeDb }) {
   async function insert({ name }) {
     const db = await makeDb();
     const newHero = {
-      id: genId(),
+      id: await genId(),
       name
     };
     db['heroes'].push(newHero);
@@ -56,7 +56,8 @@ module.exports = function makeHeroesDb({ makeDb }) {
     return null;
   }
 
-  function genId() {
+  async function genId() {
+    const db = await makeDb();
     return db['heroes'].length > 0
       ? Math.max(...db['heroes'].map(hero => hero.id)) + 1
       : 11;

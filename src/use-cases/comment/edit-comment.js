@@ -1,0 +1,1 @@
+const makeComment = require('../../entities/comment')
