@@ -1,21 +1,28 @@
 const express = require('express');
-var cors = require('cors')
-const app = express();
+const cors = require('cors')
 const port = 3000;
 
-var corsOptions = {
-    origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+const notFound = require('./controllers/not-found');
+const makeCallback = require('./helpers/express-callback');
 
+require('dotenv').config();
+
+const app = express();
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 app.use(cors(corsOptions));
 
 // Body Parser Middleware
 app.use(express.json());
 app.use(express.urlencoded({
-    extended: false
+  extended: false
 }));
 
-app.use('/', require('./routes/api/index'));
+app.use('/', require('./routes/pages'));
 app.use('/api', require('./routes/api'));
-app.listen(port, () => console.log(`Server started on port ${port}!`));
+
+app.use(makeCallback(notFound));
+
+app.listen(port || 3000, () => console.log(`Server started on port ${port}!`));

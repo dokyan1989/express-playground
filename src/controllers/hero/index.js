@@ -11,7 +11,6 @@ const makeUpdateHero = require('./update-hero');
 const makeDeleteHero = require('./delete-hero');
 const makeGetHeroes = require('./get-heroes');
 const makeGetHeroById = require('./get-hero-by-id');
-const notFound = require('./not-found');
 
 const createHero = makeCreateHero({ addHero });
 const updateHero = makeUpdateHero({ editHero });
@@ -24,8 +23,7 @@ const heroController = Object.freeze({
   updateHero,
   deleteHero,
   getHeroes,
-  getHeroById,
-  notFound
+  getHeroById
 });
 
 module.exports = heroController;
