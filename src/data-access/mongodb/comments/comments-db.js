@@ -1,4 +1,4 @@
-const Id = require('../../helpers/Id');
+const Id = require('../../../helpers/Id');
 
 module.exports = function makeCommentsDb ({ makeDb }) {
   return Object.freeze({

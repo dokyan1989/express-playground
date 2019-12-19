@@ -3,7 +3,7 @@ const makeEditHero = require('./edit-hero');
 const makeListHeroes = require('./list-heroes');
 const makeRemoveHero = require('./remove-hero');
 const makeFindHeroById = require('./find-hero-by-id');
-const heroesDb = require('../../data-access/heroes');
+const heroesDb = require('../../data-access/mock/heroes');
 
 const addHero = makeAddHero({ heroesDb });
 const editHero = makeEditHero({ heroesDb });

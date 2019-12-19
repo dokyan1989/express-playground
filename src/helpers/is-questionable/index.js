@@ -9,4 +9,4 @@ const isQuestionable = makeIsQuestionable({
   querystring
 });
 
-export default isQuestionable;
+module.exports = isQuestionable;
