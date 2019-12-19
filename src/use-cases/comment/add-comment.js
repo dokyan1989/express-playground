@@ -1,14 +1,21 @@
 const makeComment = require('../../entities/comment');
 
-module.exports = function makeAddComment ({ commentsDb, handleModeration }) {
+module.exports = function makeAddComment ({
+  commentsDb,
+  handleModeration
+}) {
   return async function addComment (commentInfo) {
     const comment = makeComment(commentInfo);
-    const exists = await commentsDb.findByHash({ hash: comment.getHash() });
+    const exists = await commentsDb.findByHash({
+      hash: comment.getHash()
+    });
     if (exists) {
       return exists;
     }
 
-    const moderated = await handleModeration({ comment });
+    const moderated = await handleModeration({
+      comment
+    });
     const commentSource = moderated.getSource();
     return commentsDb.insert({
       author: moderated.getAuthor(),
