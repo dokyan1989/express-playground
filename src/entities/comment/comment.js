@@ -59,7 +59,7 @@ module.exports = function buildMakeComment ({ Id, md5, sanitize, makeSource }) {
       getText: () => sanitizedText,
       isDeleted: () => sanitizedText === deletedText,
       isPublished: () => published,
-      markDelete: () => {
+      markDeleted: () => {
         sanitizedText = deletedText;
         author = 'deleted';
       },

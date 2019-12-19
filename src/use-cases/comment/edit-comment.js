@@ -15,7 +15,7 @@ module.exports = function makeEditComment ({ commentsDb, handleModeration }) {
       throw new Error('Comment not found.');
     }
 
-    const comment = makeComment({ ...existing, ...changes, modifiedOn: null });
+    const comment = makeComment({ ...existing, ...changes, modifiedOn: undefined });
     if (comment.getHash() === existing.hash) {
       console.log(comment);
       return existing;

@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const port = 3000;
 
 const notFound = require('./controllers/not-found');
 const makeCallback = require('./helpers/express-callback');
@@ -27,4 +26,4 @@ app.use('/api', require('./routes/api'));
 
 app.use(makeCallback(notFound));
 
-app.listen(port || 3000, () => console.log(`Server started on port ${port}!`));
+app.listen(process.env.PORT || 3000, () => console.log(`Server started on port ${process.env.PORT}!`));

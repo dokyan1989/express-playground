@@ -1,9 +1,6 @@
 const makeComment = require('../../entities/comment');
 
-module.exports = function makeAddComment ({
-  commentsDb,
-  handleModeration
-}) {
+module.exports = function makeAddComment ({ commentsDb, handleModeration }) {
   return async function addComment (commentInfo) {
     const comment = makeComment(commentInfo);
     const exists = await commentsDb.findByHash({
