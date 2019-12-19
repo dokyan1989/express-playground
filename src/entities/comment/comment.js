@@ -75,4 +75,4 @@ module.exports = function buildMakeComment ({ Id, md5, sanitize, makeSource }) {
       return md5(sanitizedText + published + (author || '') + (postId || '') + (replyToId || ''));
     }
   };
-}
+};
