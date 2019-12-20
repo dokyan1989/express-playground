@@ -55,9 +55,9 @@ function buildModerationApiCommand (text) {
     params: { classify: true },
     headers: {
       'Content-Type': 'text/html',
-      'Ocp-Apim-Subscription-Key': process.env.DM_MODERATOR_API_KEY
+      'Ocp-Apim-Subscription-Key': process.env.MODERATOR_API_KEY
     },
-    url: process.env.DM_MODERATOR_API_URL
+    url: process.env.MODERATOR_API_URL
   };
 }
 
@@ -83,7 +83,7 @@ function buildAkismetApiCommand ({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    url: process.env.DM_SPAM_API_URL,
+    url: process.env.SPAM_API_URL,
     method: 'post',
     data: querystring.stringify({
       // blog: 'https://devmastery.com',

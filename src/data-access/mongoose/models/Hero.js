@@ -11,8 +11,9 @@ const HeroSchema = new mongoose.Schema({
   },
   slug: String
 }, {
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
+  toJSON: { virtuals: true, versionKey: false },
+  toObject: { virtuals: true, versionKey: false },
+  id: false
 });
 
 HeroSchema.pre('save', function (next) {

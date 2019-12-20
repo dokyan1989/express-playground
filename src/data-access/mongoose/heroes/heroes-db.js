@@ -24,10 +24,7 @@ module.exports = function makeHeroesDb ({ makeDb }) {
 
   async function insert ({ name }) {
     const db = await makeDb();
-    const newHero = {
-      name
-    };
-    const hero = await db.heroes.create(newHero);
+    const hero = await db.heroes.create({ name });
     return hero;
   }
 

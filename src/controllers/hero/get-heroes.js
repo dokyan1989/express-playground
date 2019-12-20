@@ -1,3 +1,5 @@
+const ResponseStatus = require('../../constants/ResponseStatus');
+
 module.exports = function makeGetHeroes ({ listHeroes }) {
   return async function getHeroes (httpRequest) {
     const headers = {
@@ -9,7 +11,12 @@ module.exports = function makeGetHeroes ({ listHeroes }) {
       return {
         headers,
         statusCode: 200,
-        body: heroes
+        body: {
+          status: ResponseStatus.SUCCESS,
+          data: {
+            heroes
+          }
+        }
       };
     } catch (e) {
       console.log(e);
