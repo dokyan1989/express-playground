@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+mongoose.connection.once('open', () => {
+  console.log(`MongoDB Connected: ${mongoose.connection.host}`);
+});
+
 module.exports = {
   isConnected: () => {
     return (mongoose.connection.readyState === 1);
