@@ -11,6 +11,8 @@ const {
 router.get('/', makeCallback(getComments));
 router.post('/', makeCallback(postComment));
 router.patch('/:id', makeCallback(patchComment));
+router.patch('/', makeCallback(patchComment));
 router.delete('/:id', makeCallback(deleteComment));
+router.delete('/', makeCallback(deleteComment));
 
 module.exports = router;

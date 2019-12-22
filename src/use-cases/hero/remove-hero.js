@@ -20,7 +20,7 @@ module.exports = function makeRemoveHero ({ heroesDb }) {
   function deleteNothing () {
     return {
       deletedCount: 0,
-      message: 'Comment not found, nothing to delete.'
+      message: 'Hero not found, nothing to delete.'
     };
   }
 };

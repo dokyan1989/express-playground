@@ -1,13 +1,14 @@
 const makeHero = require('../../entities/hero');
+const { ValidationError } = require('../../helpers/error-types');
 
 module.exports = function makeEditHero ({ heroesDb }) {
   return async function editHero ({ id, name } = {}) {
     if (!id) {
-      throw new Error('You must supply an id.');
+      throw new ValidationError('You must supply an id.', 'id');
     }
 
     if (!name) {
-      throw new Error('You must supply a name.');
+      throw new ValidationError('You must supply a name.', 'name');
     }
 
     const existing = await heroesDb.findById({ id });

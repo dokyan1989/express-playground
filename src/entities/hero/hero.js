@@ -1,7 +1,9 @@
+const { ValidationError } = require('../../helpers/error-types');
+
 module.exports = function buildMakeHero () {
   return function makeHero ({ name } = {}) {
     if (!name) {
-      throw new Error('Hero must have a name.');
+      throw new ValidationError('Hero must have a name.', 'name');
     }
     return Object.freeze({
       getName: () => name

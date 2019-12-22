@@ -2,31 +2,18 @@ const ResponseStatus = require('../../constants/ResponseStatus');
 
 module.exports = function makeGetHeroes ({ listHeroes }) {
   return async function getHeroes (httpRequest) {
-    const headers = {
-      'Content-Type': 'application/json'
+    const heroes = await listHeroes();
+    return {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      statusCode: 200,
+      body: {
+        status: ResponseStatus.SUCCESS,
+        data: {
+          heroes
+        }
+      }
     };
-
-    try {
-      const heroes = await listHeroes();
-      return {
-        headers,
-        statusCode: 200,
-        body: {
-          status: ResponseStatus.SUCCESS,
-          data: {
-            heroes
-          }
-        }
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        headers,
-        statusCode: 400,
-        body: {
-          error: e.message
-        }
-      };
-    }
   };
 };

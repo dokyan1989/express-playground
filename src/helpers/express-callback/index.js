@@ -1,5 +1,5 @@
 module.exports = function makeExpressCallback (controller) {
-  return (req, res) => {
+  return (req, res, next) => {
     const httpRequest = {
       body: req.body,
       query: req.query,
@@ -22,6 +22,6 @@ module.exports = function makeExpressCallback (controller) {
         res.type('json');
         res.status(httpResponse.statusCode).send(httpResponse.body);
       })
-      .catch(e => res.status(500).send({ error: 'An unkown error occurred.' }));
+      .catch(error => next(error));
   };
 };

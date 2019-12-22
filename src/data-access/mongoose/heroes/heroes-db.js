@@ -19,7 +19,7 @@ module.exports = function makeHeroesDb ({ makeDb }) {
     if (!hero) {
       return null;
     }
-    return hero;
+    return hero.toJSON();
   }
 
   async function insert ({ name }) {
@@ -28,9 +28,9 @@ module.exports = function makeHeroesDb ({ makeDb }) {
     return hero;
   }
 
-  async function remove ({ id }) {
+  async function remove ({ _id: id }) {
     const db = await makeDb();
-    const hero = await db.heroes.findById(id);
+    const hero = await db.heroes.findById(id.toString());
     if (hero) {
       hero.remove();
       return 1;

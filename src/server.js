@@ -25,6 +25,7 @@ app.use('/', require('./routes/pages'));
 app.use('/api', require('./routes/api'));
 
 app.use(makeCallback(notFound));
+app.use(require('./middleware/error-handler'));
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(

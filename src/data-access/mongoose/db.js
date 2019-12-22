@@ -11,7 +11,9 @@ module.exports = {
   connect: async () => {
     await mongoose.connect(`${process.env.DB_URL}/${process.env.DB_NAME}`, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
     });
   }
 };
