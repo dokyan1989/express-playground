@@ -1,12 +1,18 @@
-const { ValidationError } = require('$app-helpers/error-types');
+const { ValidationError, DuplicateError } = require('$app-helpers/error-types');
 
-module.exports = function (error, doc, next) {
-  if (error.name === 'MongoError' && error.code === 11000) {
-    next(new Error('There was a duplicate key error'));
-  } else if (error.name === 'ValidationError') {
-    const { message, path: fieldName } = error.errors.name;
+module.exports = function (err, doc, next) {
+  if (isUniqueError(err)) {
+    next(new DuplicateError(err.message));
+  } else if (err.name === 'ValidationError') {
+    const { message, path: fieldName } = err.errors.name;
     next(new ValidationError(message, fieldName));
   } else {
     next();
   }
 };
+
+function isUniqueError (err) {
+  return err &&
+    (err.name === 'BulkWriteError' || err.name === 'MongoError') &&
+    (err.code === 11000 || err.code === 11001);
+}

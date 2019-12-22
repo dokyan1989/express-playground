@@ -23,7 +23,6 @@ app.use(
 
 app.use('/', require('./routes/pages'));
 app.use('/api', require('./routes/api'));
-
 app.use(makeCallback(notFound));
 app.use(require('./middleware/error-handler'));
 
@@ -34,8 +33,8 @@ const server = app.listen(
 );
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (error, promise) => {
-  console.log(`Error: ${error.message}`.red);
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`.red);
   // Close server & exit process
   server.close(() => process.exit(1));
 });

@@ -1,26 +1,19 @@
+const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
+
 module.exports = function makeRemoveHero ({ heroesDb }) {
   return async function removeHero ({ id } = {}) {
     if (!id) {
-      throw new Error('You must supply a hero id.');
+      throw new ValidationError('You must supply a hero id.', 'id');
     }
 
-    const heroToDelete = await heroesDb.findById({ id });
-
+    const heroToDelete = await heroesDb.remove({ id });
     if (!heroToDelete) {
-      return deleteNothing();
+      throw new NotFoundError('Hero not found, nothing to delete.', 'hero');
     }
 
-    await heroesDb.remove(heroToDelete);
     return {
       deletedCount: 1,
       message: 'Hero deleted'
     };
   };
-
-  function deleteNothing () {
-    return {
-      deletedCount: 0,
-      message: 'Hero not found, nothing to delete.'
-    };
-  }
 };

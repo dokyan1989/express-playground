@@ -3,7 +3,7 @@ module.exports = async function notFound () {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: { error: 'Not found.' },
-    statusCode: 404
+    statusCode: 404,
+    body: { error: 'Not found.' }
   };
 };

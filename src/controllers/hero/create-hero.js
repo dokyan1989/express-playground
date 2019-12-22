@@ -12,9 +12,7 @@ module.exports = function makeCreateHero ({ addHero }) {
       statusCode: 201,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: {
-          hero
-        }
+        data: { hero }
       }
     };
   };

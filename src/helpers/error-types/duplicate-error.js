@@ -1,5 +1,5 @@
-class ValidationError extends Error {
-  constructor (message = 'Validation error', fieldName = 'unknown') {
+class DuplicateError extends Error {
+  constructor (message = 'There was a duplicate key error', fieldName = 'indexedField') {
     super();
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
@@ -8,4 +8,4 @@ class ValidationError extends Error {
   }
 };
 
-module.exports = ValidationError;
+module.exports = DuplicateError;

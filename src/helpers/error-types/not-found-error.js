@@ -1,5 +1,5 @@
-class ValidationError extends Error {
-  constructor (message = 'Validation error', fieldName = 'unknown') {
+class NotFoundError extends Error {
+  constructor (message = 'Not found', fieldName = 'unknown') {
     super();
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
@@ -8,4 +8,4 @@ class ValidationError extends Error {
   }
 };
 
-module.exports = ValidationError;
+module.exports = NotFoundError;

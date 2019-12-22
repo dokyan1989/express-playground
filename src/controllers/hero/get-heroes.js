@@ -10,9 +10,7 @@ module.exports = function makeGetHeroes ({ listHeroes }) {
       statusCode: 200,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: {
-          heroes
-        }
+        data: { heroes }
       }
     };
   };

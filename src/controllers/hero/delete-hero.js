@@ -1,3 +1,5 @@
+const ResponseStatus = require('../../constants/ResponseStatus');
+
 module.exports = function makeDeleteHero ({ removeHero }) {
   return async function deleteHero (httpRequest) {
     const deleted = await removeHero({ id: httpRequest.params.id });
@@ -5,9 +7,10 @@ module.exports = function makeDeleteHero ({ removeHero }) {
       headers: {
         'Content-Type': 'application/json'
       },
-      statusCode: deleted.deletedCount === 0 ? 404 : 200,
+      statusCode: 200,
       body: {
-        deleted
+        status: ResponseStatus.SUCCESS,
+        data: deleted
       }
     };
   };
