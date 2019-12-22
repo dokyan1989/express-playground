@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const makeCallback = require('../../helpers/express-callback');
+const makeCallback = require('$app-helpers/express-callback');
 const {
   deleteComment,
   getComments,
   postComment,
   patchComment
-} = require('../../controllers/comments');
+} = require('$app-controllers/comments');
 
 router.get('/', makeCallback(getComments));
 router.post('/', makeCallback(postComment));

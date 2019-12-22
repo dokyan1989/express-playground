@@ -3,8 +3,8 @@ const makeEditComment = require('./edit-comment');
 const makeListComments = require('./list-comments');
 const makeRemoveComment = require('./remove-comment');
 const makeHandleModeration = require('./handle-moderation');
-const commentsDb = require('../../data-access/mongodb/comments');
-const isQuestionable = require('../../helpers/is-questionable');
+const commentsDb = require('$app-data-access/mongodb/comments');
+const isQuestionable = require('$app-helpers/is-questionable');
 
 const handleModeration = makeHandleModeration({
   isQuestionable,

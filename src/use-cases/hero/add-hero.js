@@ -1,4 +1,4 @@
-const makeHero = require('../../entities/hero');
+const makeHero = require('$app-entities/hero');
 
 module.exports = function makeAddHero ({ heroesDb }) {
   return async function addHero (heroInfo) {

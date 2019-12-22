@@ -1,14 +1,14 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (error, req, res, next) => {
   res.set('Content-Type', 'application/json');
-  console.log(err);
-  switch (err.name) {
+  console.log(error);
+  switch (error.name) {
     case 'MongoError':
-      if (err.code === 11000) {
+      if (error.code === 11000) {
         res.status(400).send({
           status: ResponseStatus.FAIL,
-          message: err.message
+          message: error.message
         });
       }
       break;
@@ -17,7 +17,7 @@ const errorHandler = (err, req, res, next) => {
       res.status(400).send({
         status: ResponseStatus.FAIL,
         data: {
-          [err.fieldName]: err.message
+          [error.fieldName]: error.message
         }
       });
       break;
@@ -25,14 +25,14 @@ const errorHandler = (err, req, res, next) => {
     case 'RangeError':
       res.status(400).send({
         status: ResponseStatus.FAIL,
-        message: err.message
+        message: error.message
       });
       break;
 
     default:
       res.status(500).send({
         status: ResponseStatus.ERROR,
-        message: 'An unkown error occurred.'
+        message: error.message
       });
   }
 };

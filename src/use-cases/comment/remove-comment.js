@@ -1,4 +1,4 @@
-const makeComment = require('../../entities/comment');
+const makeComment = require('$app-entities/comment');
 
 module.exports = function makeRemoveComment ({ commentsDb }) {
   return async function removeComment ({ id } = {}) {

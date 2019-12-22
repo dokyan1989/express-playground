@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
-const notFound = require('./controllers/not-found');
-const makeCallback = require('./helpers/express-callback');
+const notFound = require('$app-controllers/not-found');
+const makeCallback = require('$app-helpers/express-callback');
 
 require('dotenv').config();
 
@@ -34,8 +34,8 @@ const server = app.listen(
 );
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-  console.log(`Error: ${err.message}`.red);
+process.on('unhandledRejection', (error, promise) => {
+  console.log(`Error: ${error.message}`.red);
   // Close server & exit process
   server.close(() => process.exit(1));
 });

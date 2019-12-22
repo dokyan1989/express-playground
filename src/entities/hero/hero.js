@@ -1,4 +1,4 @@
-const { ValidationError } = require('../../helpers/error-types');
+const { ValidationError } = require('$app-helpers/error-types');
 
 module.exports = function buildMakeHero () {
   return function makeHero ({ name } = {}) {

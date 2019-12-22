@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const Id = require('../../helpers/Id');
+const Id = require('$app-helpers/Id');
 const ipRegex = require('ip-regex');
 const sanitizeHtml = require('sanitize-html');
 const buildMakeComment = require('./comment');

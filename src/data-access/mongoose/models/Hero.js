@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const errorHandler = require('../middleware/error-handler');
 
 const HeroSchema = new mongoose.Schema({
   name: {
@@ -20,5 +21,7 @@ HeroSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+
+HeroSchema.post('save', errorHandler);
 
 module.exports = mongoose.model('Hero', HeroSchema);
