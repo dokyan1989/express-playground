@@ -1,5 +1,5 @@
 const makeHero = require('$app-entities/hero');
-const { ValidationError } = require('$app-helpers/error-types');
+const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
 
 module.exports = function makeEditHero ({ heroesDb }) {
   return async function editHero ({ id, name } = {}) {
@@ -14,7 +14,7 @@ module.exports = function makeEditHero ({ heroesDb }) {
     const existing = await heroesDb.findById({ id });
 
     if (!existing) {
-      throw new RangeError('Hero not found.');
+      throw new NotFoundError('Hero not found.', 'hero');
     }
 
     const hero = makeHero({ name });

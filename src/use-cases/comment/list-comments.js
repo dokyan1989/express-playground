@@ -1,7 +1,9 @@
+const { ValidationError } = require('$app-helpers/error-types');
+
 module.exports = function makeListComments ({ commentsDb }) {
   return async function listComments ({ postId } = {}) {
     if (!postId) {
-      throw new Error('You must supply a post id.');
+      throw new ValidationError('You must supply a post id.', 'postId');
     }
     const comments = await commentsDb.findByPostId({
       postId,

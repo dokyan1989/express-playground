@@ -1,18 +1,19 @@
 const makeComment = require('$app-entities/comment');
+const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
 
 module.exports = function makeEditComment ({ commentsDb, handleModeration }) {
   return async function editComment ({ id, ...changes } = {}) {
     if (!id) {
-      throw new Error('You must supply an id.');
+      throw new ValidationError('You must supply an id.', 'id');
     }
 
     if (!changes.text) {
-      throw new Error('You must supply text.');
+      throw new ValidationError('You must supply text.', 'text');
     }
 
     const existing = await commentsDb.findById({ id });
     if (!existing) {
-      throw new Error('Comment not found.');
+      throw new NotFoundError('Comment not found.', 'comment');
     }
 
     const comment = makeComment({ ...existing, ...changes, modifiedOn: undefined });

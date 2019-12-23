@@ -14,7 +14,8 @@ const HeroSchema = new mongoose.Schema({
 }, {
   toJSON: { virtuals: true, versionKey: false },
   toObject: { virtuals: true, versionKey: false },
-  id: false
+  id: false,
+  collection: 'heroes'
 });
 
 HeroSchema.pre('save', function (next) {
@@ -23,5 +24,6 @@ HeroSchema.pre('save', function (next) {
 });
 
 HeroSchema.post('save', errorHandler);
+HeroSchema.post('findOne', errorHandler);
 
 module.exports = mongoose.model('Hero', HeroSchema);

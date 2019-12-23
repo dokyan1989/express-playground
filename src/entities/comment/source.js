@@ -1,11 +1,13 @@
+const { ValidationError } = require('$app-helpers/error-types');
+
 module.exports = function buildMakeSource ({ isValidIp }) {
   return function makeSource ({ ip, browser, referrer } = {}) {
     if (!ip) {
-      throw new Error('Comment source must contain an IP.');
+      throw new ValidationError('Comment source must contain an IP.', 'ip');
     }
 
     if (!isValidIp(ip)) {
-      throw new RangeError('Comment source must contain a valid IP.');
+      throw new ValidationError('Comment source must contain a valid IP.', 'ip');
     }
 
     return Object.freeze({

@@ -1,9 +1,10 @@
 const makeComment = require('$app-entities/comment');
+const { ValidationError } = require('$app-helpers/error-types');
 
 module.exports = function makeRemoveComment ({ commentsDb }) {
   return async function removeComment ({ id } = {}) {
     if (!id) {
-      throw new Error('You must supply a comment id.');
+      throw new ValidationError('You must supply a comment id.', 'id');
     }
 
     const commentToDelete = await commentsDb.findById({ id });
