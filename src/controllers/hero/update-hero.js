@@ -1,13 +1,10 @@
-const ResponseStatus = require('../../constants/ResponseStatus');
+const ResponseStatus = require('$app-constants/ResponseStatus');
 
 module.exports = function makeUpdateHero ({ editHero }) {
   return async function updateHero (httpRequest) {
     const { name } = httpRequest.body;
-    const toEdit = {
-      name,
-      id: httpRequest.params.id
-    };
-    const hero = await editHero(toEdit);
+    const hero = await editHero({ id: httpRequest.params.id, name });
+
     return {
       headers: {
         'Content-Type': 'application/json',

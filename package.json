@@ -37,6 +37,7 @@
     "$app-helpers": "./src/helpers",
     "$app-entities": "./src/entities",
     "$app-data-access": "./src/data-access",
-    "$app-controllers": "./src/controllers"
+    "$app-controllers": "./src/controllers",
+    "$app-constants": "./src/constants"
   }
 }
