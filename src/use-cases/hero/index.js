@@ -3,7 +3,7 @@ const makeEditHero = require('./edit-hero');
 const makeListHeroes = require('./list-heroes');
 const makeRemoveHero = require('./remove-hero');
 const makeFindHeroById = require('./find-hero-by-id');
-const heroesDb = require('$app-data-access/mongoose/heroes');
+const heroesDb = require('../../data-access/mongoose/heroes');
 
 const addHero = makeAddHero({ heroesDb });
 const editHero = makeEditHero({ heroesDb });

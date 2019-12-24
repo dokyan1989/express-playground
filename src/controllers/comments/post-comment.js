@@ -1,4 +1,4 @@
-const ResponseStatus = require('$app-constants/ResponseStatus');
+const ResponseStatus = require('../../constants/ResponseStatus');
 
 module.exports = function makePostComment ({ addComment }) {
   return async function postComment (httpRequest) {

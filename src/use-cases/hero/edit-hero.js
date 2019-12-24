@@ -1,5 +1,5 @@
-const makeHero = require('$app-entities/hero');
-const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
+const makeHero = require('../../entities/hero');
+const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
 module.exports = function makeEditHero ({ heroesDb }) {
   return async function editHero ({ id, name } = {}) {

@@ -1,5 +1,5 @@
-const makeComment = require('$app-entities/comment');
-const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
+const makeComment = require('../../entities/comment');
+const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
 module.exports = function makeEditComment ({ commentsDb, handleModeration }) {
   return async function editComment ({ id, ...changes } = {}) {

@@ -1,4 +1,4 @@
-const { ValidationError } = require('$app-helpers/error-types');
+const { ValidationError } = require('../../helpers/error-types');
 
 module.exports = function makeListComments ({ commentsDb }) {
   return async function listComments ({ postId } = {}) {

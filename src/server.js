@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
-const notFound = require('$app-controllers/not-found');
-const makeCallback = require('$app-helpers/express-callback');
+const notFound = require('./controllers/not-found');
+const makeCallback = require('./helpers/express-callback');
 
 require('dotenv').config();
 

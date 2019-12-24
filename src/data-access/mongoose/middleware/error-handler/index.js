@@ -1,4 +1,4 @@
-const { ValidationError, DuplicateError } = require('$app-helpers/error-types');
+const { ValidationError, DuplicateError } = require('../../../../helpers/error-types');
 
 module.exports = function (err, doc, next) {
   if (isUniqueError(err)) {

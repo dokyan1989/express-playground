@@ -1,4 +1,4 @@
-const ResponseStatus = require('$app-constants/ResponseStatus');
+const ResponseStatus = require('../../constants/ResponseStatus');
 
 module.exports = function makeUpdateHero ({ editHero }) {
   return async function updateHero (httpRequest) {

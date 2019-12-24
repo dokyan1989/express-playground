@@ -1,4 +1,4 @@
-const { ValidationError, NotFoundError } = require('$app-helpers/error-types');
+const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
 module.exports = function makeRemoveHero ({ heroesDb }) {
   return async function removeHero ({ id } = {}) {

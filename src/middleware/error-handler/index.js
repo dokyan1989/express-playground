@@ -1,4 +1,4 @@
-const ResponseStatus = require('$app-constants/ResponseStatus');
+const ResponseStatus = require('../../constants/ResponseStatus');
 
 const errorHandler = (err, req, res, next) => {
   res.set('Content-Type', 'application/json');

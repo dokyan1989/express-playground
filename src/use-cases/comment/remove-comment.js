@@ -1,5 +1,5 @@
-const makeComment = require('$app-entities/comment');
-const { ValidationError } = require('$app-helpers/error-types');
+const makeComment = require('../../entities/comment');
+const { ValidationError } = require('../../helpers/error-types');
 
 module.exports = function makeRemoveComment ({ commentsDb }) {
   return async function removeComment ({ id } = {}) {

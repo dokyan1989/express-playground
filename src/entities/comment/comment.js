@@ -1,4 +1,4 @@
-const { ValidationError } = require('$app-helpers/error-types');
+const { ValidationError } = require('../../helpers/error-types');
 
 module.exports = function buildMakeComment ({ Id, md5, sanitize, makeSource }) {
   return function makeComment ({

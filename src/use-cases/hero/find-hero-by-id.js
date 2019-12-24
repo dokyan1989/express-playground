@@ -1,4 +1,4 @@
-const { NotFoundError } = require('$app-helpers/error-types');
+const { NotFoundError } = require('../../helpers/error-types');
 
 module.exports = function makeFindHeroById ({ heroesDb }) {
   return async function findHeroById ({ id }) {
