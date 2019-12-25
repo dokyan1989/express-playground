@@ -1,20 +1,20 @@
 const makeAddHero = require('./add-hero');
 const makeEditHero = require('./edit-hero');
-const makeListHeroes = require('./list-heroes');
+const makeFindHeroes = require('./find-heroes');
 const makeRemoveHero = require('./remove-hero');
 const makeFindHeroById = require('./find-hero-by-id');
 const heroesDb = require('../../data-access/mongoose/heroes');
 
 const addHero = makeAddHero({ heroesDb });
 const editHero = makeEditHero({ heroesDb });
-const listHeroes = makeListHeroes({ heroesDb });
+const findHeroes = makeFindHeroes({ heroesDb });
 const removeHero = makeRemoveHero({ heroesDb });
 const findHeroById = makeFindHeroById({ heroesDb });
 
 const heroService = Object.freeze({
   addHero,
   editHero,
-  listHeroes,
+  findHeroes,
   removeHero,
   findHeroById
 });

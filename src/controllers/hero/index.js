@@ -1,7 +1,7 @@
 const {
   addHero,
   editHero,
-  listHeroes,
+  findHeroes,
   removeHero,
   findHeroById
 } = require('../../use-cases/hero');
@@ -15,7 +15,7 @@ const makeGetHeroById = require('./get-hero-by-id');
 const createHero = makeCreateHero({ addHero });
 const updateHero = makeUpdateHero({ editHero });
 const deleteHero = makeDeleteHero({ removeHero });
-const getHeroes = makeGetHeroes({ listHeroes });
+const getHeroes = makeGetHeroes({ findHeroes });
 const getHeroById = makeGetHeroById({ findHeroById });
 
 const heroController = Object.freeze({

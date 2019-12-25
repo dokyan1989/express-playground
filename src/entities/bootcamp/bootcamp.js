@@ -1,5 +1,5 @@
-module.exports = function buildMakeUser () {
-  return function makeUser ({
+module.exports = function buildMakeBootcamp () {
+  return function makeBootcamp ({
     name,
     slug,
     description,
