@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const makeCallback = require('../../helpers/express-callback');
+const makeCallback = require('../../../helpers/express-callback');
 const {
   createHero,
   updateHero,
   deleteHero,
   getHeroes,
   getHeroById
-} = require('../../controllers/hero');
+} = require('../../../controllers/hero');
 
 router.get('/', makeCallback(getHeroes));
 router.get('/:id', makeCallback(getHeroById));

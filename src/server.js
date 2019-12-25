@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use('/', require('./routes/pages'));
-app.use('/api', require('./routes/api'));
+app.use('/api/v1', require('./routes/api/v1'));
 app.use(makeCallback(notFound));
 app.use(require('./middleware/error-handler'));
 
