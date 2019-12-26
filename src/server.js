@@ -7,8 +7,15 @@ const makeCallback = require('./helpers/express-callback');
 require('dotenv').config();
 
 const app = express();
+const whitelist = ['http://localhost:4200', 'http://localhost:5000'];
 const corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
