@@ -12,7 +12,7 @@ module.exports = function makeRegister ({ usersDb }) {
       createdAt: user.createdAt(),
       updatedAt: user.getUpdatedAt()
     });
-    registeredUser = makeUser(registeredUser);
+    registeredUser = makeUser({ id: registeredUser._id, ...registeredUser });
     return registeredUser;
   };
 };

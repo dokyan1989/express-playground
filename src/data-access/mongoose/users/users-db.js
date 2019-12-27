@@ -2,6 +2,7 @@ module.exports = function makeUsersDb ({ makeDb }) {
   return Object.freeze({
     findAll,
     findById,
+    findOne,
     insert,
     remove,
     update
@@ -16,6 +17,15 @@ module.exports = function makeUsersDb ({ makeDb }) {
   async function findById ({ id }) {
     const db = await makeDb();
     const user = await db.users.findById(id);
+    if (!user) {
+      return null;
+    }
+    return user.toJSON();
+  }
+
+  async function findOne (condition, selectFields) {
+    const db = await makeDb();
+    const user = await db.users.findOne(condition).select(selectFields.join(' '));
     if (!user) {
       return null;
     }
