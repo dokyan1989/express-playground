@@ -19,6 +19,12 @@ module.exports = function makeExpressCallback (controller) {
         if (httpResponse.headers) {
           res.set(httpResponse.headers);
         }
+
+        if (httpResponse.tokenInfo) {
+          const { token, options } = httpResponse.tokenInfo;
+          res.cookie('token', token, options);
+        }
+
         res.type('json');
         res.status(httpResponse.statusCode).send(httpResponse.body);
       })
