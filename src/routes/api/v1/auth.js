@@ -10,3 +10,5 @@ const {
 router.post('/register', makeCallback(register));
 router.post('/login', makeCallback(login));
 router.get('/logout', makeCallback(logout));
+
+module.exports = router;

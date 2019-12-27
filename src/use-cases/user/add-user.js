@@ -9,7 +9,7 @@ module.exports = function makeAddUser ({ usersDb }) {
       email: user.getEmail(),
       role: user.getRole(),
       password: user.getPassword(),
-      createdAt: user.createdAt(),
+      createdAt: user.getCreatedAt(),
       updatedAt: user.getUpdatedAt()
     });
 

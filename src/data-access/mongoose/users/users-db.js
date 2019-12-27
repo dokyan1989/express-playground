@@ -25,7 +25,13 @@ module.exports = function makeUsersDb ({ makeDb }) {
 
   async function findOne (condition, selectFields) {
     const db = await makeDb();
-    const user = await db.users.findOne(condition).select(selectFields.join(' '));
+    let query = db.users.findOne(condition);
+
+    if (selectFields && Array.isArray(selectFields)) {
+      query = query.select(selectFields.join(' '));
+    }
+
+    const user = await query;
     if (!user) {
       return null;
     }

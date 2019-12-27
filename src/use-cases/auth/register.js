@@ -9,7 +9,7 @@ module.exports = function makeRegister ({ usersDb }) {
       email: user.getEmail(),
       role: user.getRole(),
       password: user.getPassword(),
-      createdAt: user.createdAt(),
+      createdAt: user.getCreatedAt(),
       updatedAt: user.getUpdatedAt()
     });
     registeredUser = makeUser({ id: registeredUser._id, ...registeredUser });
