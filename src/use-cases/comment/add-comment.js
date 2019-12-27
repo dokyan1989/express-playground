@@ -14,7 +14,7 @@ module.exports = function makeAddComment ({ commentsDb, handleModeration }) {
       comment
     });
     const commentSource = moderated.getSource();
-    return commentsDb.insert({
+    const createdComment = await commentsDb.insert({
       author: moderated.getAuthor(),
       createdOn: moderated.getCreatedOn(),
       hash: moderated.getHash(),
@@ -30,5 +30,6 @@ module.exports = function makeAddComment ({ commentsDb, handleModeration }) {
       },
       text: moderated.getText()
     });
+    return createdComment;
   };
 };

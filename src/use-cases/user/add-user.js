@@ -1,5 +1,18 @@
-module.exports = function makeAddUser ({ usersDb }) {
-  return function addUser () {
+const makeUser = require('../../entities/user');
 
+module.exports = function makeAddUser ({ usersDb }) {
+  return async function addUser (userData) {
+    const user = makeUser(userData);
+
+    const createdUser = await usersDb.insert({
+      name: user.getName(),
+      email: user.getEmail(),
+      role: user.getRole(),
+      password: user.getPassword(),
+      createdAt: user.createdAt(),
+      updatedAt: user.getUpdatedAt()
+    });
+
+    return createdUser;
   };
 };

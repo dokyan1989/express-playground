@@ -3,7 +3,7 @@ const makeEditUser = require('./edit-user');
 const makeFindUserById = require('./find-user-by-id');
 const makeFindUsers = require('./find-users');
 const makeRemoveUser = require('./remove-user');
-const usersDb = require('../../data-access/mongoose/usersDb');
+const usersDb = require('../../data-access/mongoose/users');
 
 const addUser = makeAddUser({ usersDb });
 const editUser = makeEditUser({ usersDb });

@@ -10,7 +10,15 @@ const HeroSchema = new mongoose.Schema({
     trim: true,
     maxlength: [50, 'Name can not be more than 50 characters']
   },
-  slug: String
+  slugName: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
 }, {
   toJSON: { virtuals: true, versionKey: false },
   toObject: { virtuals: true, versionKey: false },
@@ -19,7 +27,7 @@ const HeroSchema = new mongoose.Schema({
 });
 
 HeroSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
+  this.slugName = slugify(this.name, { lower: true });
   next();
 });
 

@@ -2,12 +2,15 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const slugify = require('slugify');
+const errorHandler = require('../middleware/error-handler');
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please add a name']
   },
+  slugName: String,
   email: {
     type: String,
     required: [true, 'Please add an email'],
@@ -38,16 +41,25 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+}, {
+  toJSON: { virtuals: true, versionKey: false },
+  toObject: { virtuals: true, versionKey: false },
+  id: false
 });
 
 // Encrypt password using bcrypt
 UserSchema.pre('save', async function (next) {
+  this.slugName = slugify(this.name, { lower: true });
   if (!this.isModified('password')) {
     next();
   }
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+UserSchema.post('save', errorHandler);
+UserSchema.post('findOne', errorHandler);
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function () {

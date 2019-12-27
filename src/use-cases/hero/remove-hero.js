@@ -6,9 +6,9 @@ module.exports = function makeRemoveHero ({ heroesDb }) {
       throw new ValidationError('You must supply a hero id.', 'id');
     }
 
-    const heroToDelete = await heroesDb.remove({ id });
-    if (!heroToDelete) {
-      throw new NotFoundError('Hero not found, nothing to delete.', 'hero');
+    const deletedHero = await heroesDb.remove({ id });
+    if (!deletedHero) {
+      throw new NotFoundError('Hero not found, nothing to delete.', 'message');
     }
 
     return {
