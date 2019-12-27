@@ -14,7 +14,7 @@ module.exports = function makeExpressCallback (controller) {
       }
     };
 
-    controller(httpRequest)
+    controller(httpRequest, res)
       .then(httpResponse => {
         if (httpResponse.headers) {
           res.set(httpResponse.headers);

@@ -3,13 +3,15 @@ const ResponseStatus = require('../../constants/ResponseStatus');
 
 const makeRegister = require('./register');
 const makeLogin = require('./login');
+const makeLogout = require('./logout');
 
 const register = makeRegister({ authService, makeTokenResponse });
 const login = makeLogin({ authService, makeTokenResponse });
-
+const logout = makeLogout();
 const authController = Object.freeze({
   register,
-  login
+  login,
+  logout
 });
 
 function makeTokenResponse (user, statusCode) {
