@@ -1,8 +1,8 @@
 const makeComment = require('../../entities/comment');
 const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
-module.exports = function makeEditComment ({ commentsDb, handleModeration }) {
-  return async function editComment ({ id, ...changes } = {}) {
+module.exports = function makeUpdateComment ({ commentsDb, handleModeration }) {
+  return async function updateComment ({ id, ...changes } = {}) {
     if (!id) {
       throw new ValidationError('You must supply an id.', 'id');
     }

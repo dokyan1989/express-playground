@@ -1,8 +1,8 @@
 const makeComment = require('../../entities/comment');
 const { ValidationError } = require('../../helpers/error-types');
 
-module.exports = function makeRemoveComment ({ commentsDb }) {
-  return async function removeComment ({ id } = {}) {
+module.exports = function makeDeleteComment ({ commentsDb }) {
+  return async function deleteComment ({ id } = {}) {
     if (!id) {
       throw new ValidationError('You must supply a comment id.', 'id');
     }

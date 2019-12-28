@@ -1,7 +1,7 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makePatchComment ({ editComment }) {
-  return async function patchComment (httpRequest) {
+module.exports = function makeUpdateComment ({ commentService }) {
+  return async function updateComment (httpRequest) {
     const { source = {}, ...commentInfo } = httpRequest.body;
     source.ip = httpRequest.ip;
     source.browser = httpRequest.headers['User-Agent'];
@@ -13,7 +13,7 @@ module.exports = function makePatchComment ({ editComment }) {
       source,
       id: httpRequest.params.id
     };
-    const patched = await editComment(toEdit);
+    const patched = await commentService.updateComment(toEdit);
     return {
       headers: {
         'Content-Type': 'application/json',

@@ -1,12 +1,12 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeGetComments ({ listComments }) {
+module.exports = function makeGetComments ({ commentService }) {
   return async function getComments (httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     };
 
-    const postComments = await listComments({
+    const postComments = await commentService.getComments({
       postId: httpRequest.query.postId
     });
     return {

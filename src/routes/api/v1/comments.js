@@ -4,14 +4,14 @@ const { makeHandlerCallback } = require('../../../helpers/express-callback');
 const {
   deleteComment,
   getComments,
-  postComment,
-  patchComment
+  createComment,
+  updateComment
 } = require('../../../controllers/comments');
 
 router.get('/', makeHandlerCallback(getComments));
-router.post('/', makeHandlerCallback(postComment));
-router.patch('/:id', makeHandlerCallback(patchComment));
-router.patch('/', makeHandlerCallback(patchComment));
+router.post('/', makeHandlerCallback(createComment));
+router.put('/:id', makeHandlerCallback(updateComment));
+router.put('/', makeHandlerCallback(updateComment));
 router.delete('/:id', makeHandlerCallback(deleteComment));
 router.delete('/', makeHandlerCallback(deleteComment));
 

@@ -1,14 +1,14 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makePostComment ({ addComment }) {
-  return async function postComment (httpRequest) {
+module.exports = function makeCreateComment ({ commentService }) {
+  return async function createComment (httpRequest) {
     const { source = {}, ...commentInfo } = httpRequest.body;
     source.ip = httpRequest.ip;
     source.browser = httpRequest.headers['User-Agent'];
     if (httpRequest.headers.referer) {
       source.referrer = httpRequest.headers.referer;
     }
-    const comment = await addComment({
+    const comment = await commentService.createComment({
       ...commentInfo,
       source
     });

@@ -41,9 +41,9 @@ module.exports = function makeIsQuestionable ({
         })
       ]);
       return inappropriate || spam;
-    } catch (e) {
-      console.log(e);
-      return true;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
     }
   };
 };

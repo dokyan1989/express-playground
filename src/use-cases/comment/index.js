@@ -1,7 +1,7 @@
-const makeAddComment = require('./add-comment');
-const makeEditComment = require('./edit-comment');
-const makeListComments = require('./list-comments');
-const makeRemoveComment = require('./remove-comment');
+const makeCreateComment = require('./create-comment');
+const makeUpdateComment = require('./update-comment');
+const makeGetComments = require('./get-comments');
+const makeDeleteComment = require('./delete-comment');
 const makeHandleModeration = require('./handle-moderation');
 const commentsDb = require('../../data-access/mongodb/comments');
 const isQuestionable = require('../../helpers/is-questionable');
@@ -11,17 +11,17 @@ const handleModeration = makeHandleModeration({
   initiateReview: async () => {} // TODO: Make real initiate review function.
 });
 
-const addComment = makeAddComment({ commentsDb, handleModeration });
-const editComment = makeEditComment({ commentsDb, handleModeration });
-const listComments = makeListComments({ commentsDb });
-const removeComment = makeRemoveComment({ commentsDb });
+const createComment = makeCreateComment({ commentsDb, handleModeration });
+const updateComment = makeUpdateComment({ commentsDb, handleModeration });
+const getComments = makeGetComments({ commentsDb });
+const deleteComment = makeDeleteComment({ commentsDb });
 
 const commentService = Object.freeze({
-  addComment,
-  editComment,
+  createComment,
+  updateComment,
   handleModeration,
-  listComments,
-  removeComment
+  getComments,
+  deleteComment
 });
 
 module.exports = commentService;
