@@ -1,8 +1,8 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeGetHeroes ({ findHeroes }) {
+module.exports = function makeGetHeroes ({ heroService }) {
   return async function getHeroes (httpRequest) {
-    const heroes = await findHeroes();
+    const heroes = await heroService.getHeroes();
     return {
       headers: {
         'Content-Type': 'application/json'

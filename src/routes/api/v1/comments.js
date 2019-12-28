@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const makeCallback = require('../../../helpers/express-callback');
+const { makeHandlerCallback } = require('../../../helpers/express-callback');
 const {
   deleteComment,
   getComments,
@@ -8,11 +8,11 @@ const {
   patchComment
 } = require('../../../controllers/comments');
 
-router.get('/', makeCallback(getComments));
-router.post('/', makeCallback(postComment));
-router.patch('/:id', makeCallback(patchComment));
-router.patch('/', makeCallback(patchComment));
-router.delete('/:id', makeCallback(deleteComment));
-router.delete('/', makeCallback(deleteComment));
+router.get('/', makeHandlerCallback(getComments));
+router.post('/', makeHandlerCallback(postComment));
+router.patch('/:id', makeHandlerCallback(patchComment));
+router.patch('/', makeHandlerCallback(patchComment));
+router.delete('/:id', makeHandlerCallback(deleteComment));
+router.delete('/', makeHandlerCallback(deleteComment));
 
 module.exports = router;

@@ -4,14 +4,18 @@ const ResponseStatus = require('../../constants/ResponseStatus');
 const makeRegister = require('./register');
 const makeLogin = require('./login');
 const makeLogout = require('./logout');
+const makeGetMe = require('./get-me');
 
 const register = makeRegister({ authService, makeTokenResponse });
 const login = makeLogin({ authService, makeTokenResponse });
 const logout = makeLogout();
+const getMe = makeGetMe({ authService });
+
 const authController = Object.freeze({
   register,
   login,
-  logout
+  logout,
+  getMe
 });
 
 function makeTokenResponse (user, statusCode) {
@@ -23,6 +27,7 @@ function makeTokenResponse (user, statusCode) {
     ),
     httpOnly: true
   };
+
   if (process.env.NODE_ENV === 'production') {
     options.secure = true;
   }
@@ -32,10 +37,13 @@ function makeTokenResponse (user, statusCode) {
       'Content-Type': 'application/json',
       'Last-Modified': new Date().toUTCString()
     },
-    tokenInfo: {
-      token,
-      options
-    },
+    cookies: [
+      {
+        name: 'token',
+        value: token,
+        options
+      }
+    ],
     statusCode,
     body: {
       status: ResponseStatus.SUCCESS,

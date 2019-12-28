@@ -1,7 +1,7 @@
 const { NotFoundError } = require('../../helpers/error-types');
 
-module.exports = function makeFindHeroById ({ heroesDb }) {
-  return async function findHeroById ({ id }) {
+module.exports = function makeGetHeroById ({ heroesDb }) {
+  return async function getHeroById ({ id }) {
     const foundHero = await heroesDb.findById({ id });
 
     if (!foundHero) {

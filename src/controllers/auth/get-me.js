@@ -1,8 +1,8 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeGetHeroById ({ heroService }) {
-  return async function getHeroById (httpRequest) {
-    const hero = await heroService.getHeroById({ id: httpRequest.params.id });
+module.exports = function makeGetMe ({ authService }) {
+  return async function getMe (httpRequest) {
+    const user = await authService.getMe({ id: httpRequest.user._id });
     return {
       headers: {
         'Content-Type': 'application/json'
@@ -10,7 +10,7 @@ module.exports = function makeGetHeroById ({ heroService }) {
       statusCode: 200,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: { hero }
+        data: { user }
       }
     };
   };

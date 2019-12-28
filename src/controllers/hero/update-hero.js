@@ -1,9 +1,9 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeUpdateHero ({ editHero }) {
+module.exports = function makeUpdateHero ({ heroService }) {
   return async function updateHero (httpRequest) {
     const { name } = httpRequest.body;
-    const hero = await editHero({ id: httpRequest.params.id, name });
+    const hero = await heroService.updateHero({ id: httpRequest.params.id, name });
 
     return {
       headers: {

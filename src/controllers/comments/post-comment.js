@@ -5,8 +5,8 @@ module.exports = function makePostComment ({ addComment }) {
     const { source = {}, ...commentInfo } = httpRequest.body;
     source.ip = httpRequest.ip;
     source.browser = httpRequest.headers['User-Agent'];
-    if (httpRequest.headers.Referer) {
-      source.referrer = httpRequest.headers.Referer;
+    if (httpRequest.headers.referer) {
+      source.referrer = httpRequest.headers.referer;
     }
     const comment = await addComment({
       ...commentInfo,

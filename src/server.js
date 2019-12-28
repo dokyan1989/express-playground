@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const notFound = require('./controllers/not-found');
-const makeCallback = require('./helpers/express-callback');
+const { makeHandlerCallback } = require('./helpers/express-callback');
 
 require('dotenv').config();
 
@@ -30,7 +30,7 @@ app.use(
 
 app.use('/', require('./routes/pages'));
 app.use('/api/v1', require('./routes/api/v1'));
-app.use(makeCallback(notFound));
+app.use(makeHandlerCallback(notFound));
 app.use(require('./middleware/error-handler'));
 
 const PORT = process.env.PORT || 3000;

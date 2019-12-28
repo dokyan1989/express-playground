@@ -1,8 +1,8 @@
 const makeHero = require('../../entities/hero');
 const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
-module.exports = function makeEditHero ({ heroesDb }) {
-  return async function editHero ({ id, name } = {}) {
+module.exports = function makeUpdateHero ({ heroesDb }) {
+  return async function updateHero ({ id, name } = {}) {
     if (!id) {
       throw new ValidationError('You must supply an id.', 'id');
     }

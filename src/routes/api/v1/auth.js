@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const makeCallback = require('../../../helpers/express-callback');
+const { makeHandlerCallback, makeMiddlewareCallback } = require('../../../helpers/express-callback');
 const {
   register,
   login,
-  logout
+  logout,
+  getMe
 } = require('../../../controllers/auth');
 
-router.post('/register', makeCallback(register));
-router.post('/login', makeCallback(login));
-router.get('/logout', makeCallback(logout));
+const { protect } = require('../../../middleware/auth');
 
+router.post('/register', makeHandlerCallback(register));
+router.post('/login', makeHandlerCallback(login));
+router.get('/logout', makeHandlerCallback(logout));
+router.get('/me',
+  makeMiddlewareCallback(protect),
+  makeHandlerCallback(getMe));
 module.exports = router;

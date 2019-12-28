@@ -15,6 +15,15 @@ const errorHandler = (err, req, res, next) => {
       });
       break;
 
+    case 'NotAuthorize':
+      res.status(401).send({
+        status: ResponseStatus.FAIL,
+        data: {
+          message: err.message
+        }
+      });
+      break;
+
     default:
       res.status(500).send({
         status: ResponseStatus.ERROR,
