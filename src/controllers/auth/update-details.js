@@ -5,7 +5,7 @@ module.exports = function makeUpdateDetails ({ authService, makeTokenResponse })
     const fieldsToUpdate = {
       name: httpRequest.body.name,
       email: httpRequest.body.email
-    }; ;
+    };
     const user = await authService.updateDetails({ id: httpRequest.user._id, ...fieldsToUpdate });
     return {
       headers: {

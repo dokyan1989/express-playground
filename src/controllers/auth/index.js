@@ -7,6 +7,8 @@ const makeLogout = require('./logout');
 const makeGetMe = require('./get-me');
 const makeUpdateDetails = require('./update-details');
 const makeUpdatePassword = require('./update-password');
+const makeForgotPassword = require('./forgot-password');
+const makeResetPassword = require('./reset-password');
 
 const register = makeRegister({ authService, makeTokenResponse });
 const login = makeLogin({ authService, makeTokenResponse });
@@ -14,6 +16,8 @@ const logout = makeLogout();
 const getMe = makeGetMe({ authService });
 const updateDetails = makeUpdateDetails({ authService });
 const updatePassword = makeUpdatePassword({ authService, makeTokenResponse });
+const forgotPassword = makeForgotPassword({ authService });
+const resetPassword = makeResetPassword({ authService, makeTokenResponse });
 
 const authController = Object.freeze({
   register,
@@ -21,7 +25,9 @@ const authController = Object.freeze({
   logout,
   getMe,
   updateDetails,
-  updatePassword
+  updatePassword,
+  forgotPassword,
+  resetPassword
 });
 
 function makeTokenResponse (user, statusCode) {

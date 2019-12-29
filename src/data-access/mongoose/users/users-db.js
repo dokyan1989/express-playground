@@ -1,4 +1,4 @@
-module.exports = function makeUsersDb ({ makeDb, bcrypt }) {
+module.exports = function makeUsersDb ({ makeDb, bcrypt, slugify }) {
   return Object.freeze({
     findAll,
     findById,
@@ -58,6 +58,10 @@ module.exports = function makeUsersDb ({ makeDb, bcrypt }) {
 
   async function update ({ id, ...userData }) {
     const db = await makeDb();
+
+    if (userData.name) {
+      userData.slugName = slugify(userData.name, { lower: true });
+    }
 
     if (userData.password) {
       const salt = await bcrypt.genSalt(10);

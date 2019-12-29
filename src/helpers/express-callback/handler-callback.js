@@ -8,11 +8,13 @@ module.exports = function makeHandlerCallback (controller) {
       method: req.method,
       path: req.path,
       user: req.user,
+      protocol: req.protocol,
       headers: {
         'Content-Type': req.get('Content-Type'),
         'User-Agent': req.get('User-Agent'),
         referer: req.get('Referer'),
-        authorization: req.get('Authorization')
+        authorization: req.get('Authorization'),
+        host: req.get('host')
       }
     };
 
