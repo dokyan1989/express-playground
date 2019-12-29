@@ -1,27 +1,28 @@
-const makeAddBootcamp = require('./add-bootcamp');
-const makeEditBootcamp = require('./edit-bootcamp');
-const makeFindBootcampById = require('./find-bootcamp-by-id');
-const makeFindBootcamps = require('./find-bootcamps');
-const makeFindBootcampsInRadius = require('./find-bootcamps-in-radius');
-const makeRemoveBootcamp = require('./remove-bootcamp');
+const makeCreateBootcamp = require('./create-bootcamp');
+const makeUpdateBootcamp = require('./update-bootcamp');
+const makeGetBootcampById = require('./get-bootcamp-by-id');
+const makeGetBootcamps = require('./get-bootcamps');
+const makeGetBootcampsInRadius = require('./get-bootcamps-in-radius');
+const makeDeleteBootcamp = require('./delete-bootcamp');
 const makeUploadPhoto = require('./upload-photo');
+
 const bootcampsDb = require('../../data-access/mongoose/bootcampsDb');
 
-const addBootcamp = makeAddBootcamp({ bootcampsDb });
-const editBootcamp = makeEditBootcamp({ bootcampsDb });
-const findBootcampById = makeFindBootcampById({ bootcampsDb });
-const findBootcamps = makeFindBootcamps({ bootcampsDb });
-const findBootcampsInRadius = makeFindBootcampsInRadius({ bootcampsDb });
-const removeBootcamp = makeRemoveBootcamp({ bootcampsDb });
+const createBootcamp = makeCreateBootcamp({ bootcampsDb });
+const updateBootcamp = makeUpdateBootcamp({ bootcampsDb });
+const getBootcampById = makeGetBootcampById({ bootcampsDb });
+const getBootcamps = makeGetBootcamps({ bootcampsDb });
+const getBootcampsInRadius = makeGetBootcampsInRadius({ bootcampsDb });
+const deleteBootcamp = makeDeleteBootcamp({ bootcampsDb });
 const uploadPhoto = makeUploadPhoto({ bootcampsDb });
 
 const userService = Object.freeze({
-  addBootcamp,
-  editBootcamp,
-  findBootcampById,
-  findBootcamps,
-  findBootcampsInRadius,
-  removeBootcamp,
+  createBootcamp,
+  updateBootcamp,
+  getBootcampById,
+  getBootcamps,
+  getBootcampsInRadius,
+  deleteBootcamp,
   uploadPhoto
 });
 

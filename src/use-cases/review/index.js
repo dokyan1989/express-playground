@@ -1,22 +1,22 @@
-const makeAddReview = require('./add-review');
-const makeEditReview = require('./edit-review');
-const makeFindReviewById = require('./find-review-by-id');
-const makeFindReviews = require('./find-reviews');
-const makeRemoveReview = require('./remove-review');
+const makeCreateReview = require('./creat-review');
+const makeUpdateReview = require('./update-review');
+const makeGetReviewById = require('./get-review-by-id');
+const makeGetReviews = require('./get-reviews');
+const makeDeleteReview = require('./delete-review');
 const reviewsDb = require('../../data-access/mongoose/reviewsDb');
 
-const addReview = makeAddReview({ reviewsDb });
-const editReview = makeEditReview({ reviewsDb });
-const findReviewById = makeFindReviewById({ reviewsDb });
-const findReviews = makeFindReviews({ reviewsDb });
-const removeReview = makeRemoveReview({ reviewsDb });
+const createReview = makeCreateReview({ reviewsDb });
+const updateReview = makeUpdateReview({ reviewsDb });
+const getReviewById = makeGetReviewById({ reviewsDb });
+const getReviews = makeGetReviews({ reviewsDb });
+const deleteReview = makeDeleteReview({ reviewsDb });
 
 const reviewService = Object.freeze({
-  addReview,
-  editReview,
-  findReviewById,
-  findReviews,
-  removeReview
+  createReview,
+  updateReview,
+  getReviewById,
+  getReviews,
+  deleteReview
 });
 
 module.exports = reviewService;

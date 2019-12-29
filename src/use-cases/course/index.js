@@ -1,22 +1,22 @@
-const makeAddCourse = require('./add-course');
-const makeEditCourse = require('./edit-course');
-const makeFindCourseById = require('./find-course-by-id');
-const makeFindCourses = require('./find-courses');
-const makeRemoveCourse = require('./remove-course');
+const makeCreateCourse = require('./create-course');
+const makeUpdateCourse = require('./update-course');
+const makeGetCourseById = require('./get-course-by-id');
+const makeGetCourses = require('./get-courses');
+const makeDeleteCourse = require('./delete-course');
 const coursesDb = require('../../data-access/mongoose/coursesDb');
 
-const addCourse = makeAddCourse({ coursesDb });
-const editCourse = makeEditCourse({ coursesDb });
-const findCourseById = makeFindCourseById({ coursesDb });
-const findCourses = makeFindCourses({ coursesDb });
-const removeCourse = makeRemoveCourse({ coursesDb });
+const createCourse = makeCreateCourse({ coursesDb });
+const updateCourse = makeUpdateCourse({ coursesDb });
+const getCourseById = makeGetCourseById({ coursesDb });
+const getCourses = makeGetCourses({ coursesDb });
+const deleteCourse = makeDeleteCourse({ coursesDb });
 
 const courseService = Object.freeze({
-  addCourse,
-  editCourse,
-  findCourseById,
-  findCourses,
-  removeCourse
+  createCourse,
+  updateCourse,
+  getCourseById,
+  getCourses,
+  deleteCourse
 });
 
 module.exports = courseService;
