@@ -1,4 +1,4 @@
-module.exports = function makeUsersDb ({ makeDb }) {
+module.exports = function makeUsersDb ({ makeDb, bcrypt }) {
   return Object.freeze({
     findAll,
     findById,
@@ -14,20 +14,26 @@ module.exports = function makeUsersDb ({ makeDb }) {
     return users;
   }
 
-  async function findById ({ id }) {
+  async function findById ({ id, selectFields = null }) {
     const db = await makeDb();
-    const user = await db.users.findById(id);
+    let query = db.users.findById(id);
+
+    if (selectFields && Array.isArray(selectFields) && selectFields.length > 0) {
+      query = query.select(selectFields.join(' '));
+    }
+
+    const user = await query;
     if (!user) {
       return null;
     }
     return user.toJSON();
   }
 
-  async function findOne (condition, selectFields) {
+  async function findOne ({ condition, selectFields = null }) {
     const db = await makeDb();
     let query = db.users.findOne(condition);
 
-    if (selectFields && Array.isArray(selectFields)) {
+    if (selectFields && Array.isArray(selectFields) && selectFields.length > 0) {
       query = query.select(selectFields.join(' '));
     }
 
@@ -52,6 +58,12 @@ module.exports = function makeUsersDb ({ makeDb }) {
 
   async function update ({ id, ...userData }) {
     const db = await makeDb();
+
+    if (userData.password) {
+      const salt = await bcrypt.genSalt(10);
+      userData.password = await bcrypt.hash(userData.password, salt);
+    }
+
     const user = await db.users.findByIdAndUpdate(id, { ...userData }, {
       new: true,
       runValidators: true

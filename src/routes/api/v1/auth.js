@@ -6,7 +6,8 @@ const {
   login,
   logout,
   getMe,
-  updateDetails
+  updateDetails,
+  updatePassword
 } = require('../../../controllers/auth');
 
 const { protect } = require('../../../middleware/auth');
@@ -20,4 +21,7 @@ router.get('/me',
 router.put('/update-details',
   makeMiddlewareCallback(protect),
   makeHandlerCallback(updateDetails));
+router.put('/update-password',
+  makeMiddlewareCallback(protect),
+  makeHandlerCallback(updatePassword));
 module.exports = router;

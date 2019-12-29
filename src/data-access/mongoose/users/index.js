@@ -1,6 +1,7 @@
 const makeUsersDb = require('./users-db');
 const db = require('../db');
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 async function makeDb () {
   if (!db.isOpen()) {
@@ -11,5 +12,5 @@ async function makeDb () {
   };
 }
 
-const usersDb = makeUsersDb({ makeDb });
+const usersDb = makeUsersDb({ makeDb, bcrypt });
 module.exports = usersDb;

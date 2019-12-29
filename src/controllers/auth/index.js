@@ -6,19 +6,22 @@ const makeLogin = require('./login');
 const makeLogout = require('./logout');
 const makeGetMe = require('./get-me');
 const makeUpdateDetails = require('./update-details');
+const makeUpdatePassword = require('./update-password');
 
 const register = makeRegister({ authService, makeTokenResponse });
 const login = makeLogin({ authService, makeTokenResponse });
 const logout = makeLogout();
 const getMe = makeGetMe({ authService });
 const updateDetails = makeUpdateDetails({ authService });
+const updatePassword = makeUpdatePassword({ authService, makeTokenResponse });
 
 const authController = Object.freeze({
   register,
   login,
   logout,
   getMe,
-  updateDetails
+  updateDetails,
+  updatePassword
 });
 
 function makeTokenResponse (user, statusCode) {
