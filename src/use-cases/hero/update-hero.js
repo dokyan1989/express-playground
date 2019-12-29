@@ -16,7 +16,7 @@ module.exports = function makeUpdateHero ({ heroesDb }) {
       throw new NotFoundError('Hero not found.', 'message');
     }
 
-    const hero = makeHero({ ...foundHero, name, updatedAt: null });
+    const hero = makeHero({ ...foundHero, name, updatedAt: undefined });
     const updatedHero = await heroesDb.update({
       id,
       name: hero.getName(),

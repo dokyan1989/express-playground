@@ -23,7 +23,7 @@ module.exports = function makeProtect ({ userService }) {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log(decoded);
-    httpRequest.user = await userService.findUserById({ id: decoded.id });
+    httpRequest.user = await userService.getUserById({ id: decoded.id });
 
     return { status: ResponseStatus.SUCCESS };
   };

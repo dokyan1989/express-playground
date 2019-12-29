@@ -1,7 +1,7 @@
 const { ValidationError, NotFoundError } = require('../../helpers/error-types');
 
-module.exports = function makeRemoveUser ({ usersDb }) {
-  return async function removeUser ({ id } = {}) {
+module.exports = function makeDeleteUser ({ usersDb }) {
+  return async function deleteUser ({ id } = {}) {
     if (!id) {
       throw new ValidationError('You must supply an user id.', 'id');
     }
