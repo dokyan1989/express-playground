@@ -1,5 +1,6 @@
 const authService = require('../../use-cases/auth');
 const ResponseStatus = require('../../constants/ResponseStatus');
+const crypto = require('crypto');
 
 const makeRegister = require('./register');
 const makeLogin = require('./login');
@@ -17,7 +18,7 @@ const getMe = makeGetMe({ authService });
 const updateDetails = makeUpdateDetails({ authService });
 const updatePassword = makeUpdatePassword({ authService, makeTokenResponse });
 const forgotPassword = makeForgotPassword({ authService });
-const resetPassword = makeResetPassword({ authService, makeTokenResponse });
+const resetPassword = makeResetPassword({ authService, makeTokenResponse, crypto });
 
 const authController = Object.freeze({
   register,

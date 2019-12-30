@@ -28,6 +28,6 @@ router.put('/update-password',
   makeHandlerCallback(updatePassword));
 router.post('/forgot-password',
   makeHandlerCallback(forgotPassword));
-router.put('/reset-password',
+router.put('/reset-password/:resetToken',
   makeHandlerCallback(resetPassword));
 module.exports = router;
