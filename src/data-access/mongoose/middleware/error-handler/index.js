@@ -4,7 +4,7 @@ module.exports = function (err, doc, next) {
   if (isUniqueError(err)) {
     next(new DuplicateError(err.message));
   } else if (err.name === 'ValidationError') {
-    const { message, path: fieldName } = err.errors.name;
+    const { message, path: fieldName } = Object.values(err.errors)[0];
     next(new ValidationError(message, fieldName));
   } else if (err.name === 'CastError') {
     next(new ValidationError(err.message, err.path));

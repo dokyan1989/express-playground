@@ -58,5 +58,6 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.post('save', errorHandler);
 UserSchema.post('findOne', errorHandler);
+UserSchema.post('findOneAndUpdate', errorHandler);
 
 module.exports = mongoose.model('User', UserSchema);

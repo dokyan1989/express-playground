@@ -15,9 +15,7 @@ module.exports = function makeUpdateUser ({ usersDb }) {
     const user = makeUser({ ...foundUser, ...changes, updatedAt: undefined });
     const updatedUser = await usersDb.update({
       id,
-      name: user.getName(),
-      email: user.getEmail(),
-      role: user.getRole(),
+      ...changes,
       updatedAt: user.getUpdatedAt()
     });
 

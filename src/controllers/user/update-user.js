@@ -7,8 +7,9 @@ module.exports = function makeUpdateUser ({ userService }) {
       email: httpRequest.body.email,
       role: httpRequest.body.role
     };
-
-    const user = await userService.updateUser({ id: httpRequest.user._id, ...fieldsToUpdate });
+    Object.keys(fieldsToUpdate).forEach((key) =>
+      (fieldsToUpdate[key] === null || fieldsToUpdate[key] === undefined) && delete fieldsToUpdate[key]);
+    const user = await userService.updateUser({ id: httpRequest.params.id, ...fieldsToUpdate });
     return {
       headers: {
         'Content-Type': 'application/json',
