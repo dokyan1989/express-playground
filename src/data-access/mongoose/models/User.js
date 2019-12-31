@@ -45,15 +45,19 @@ const UserSchema = new mongoose.Schema({
   id: false
 });
 
-// Encrypt password using bcrypt
+// Create user slug from the name
 UserSchema.pre('save', async function (next) {
   this.slugName = slugify(this.name, { lower: true });
-  if (!this.isModified('password')) {
-    next();
-  }
+  next();
+});
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+// Encrypt password using bcrypt
+UserSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
 });
 
 UserSchema.post('save', errorHandler);

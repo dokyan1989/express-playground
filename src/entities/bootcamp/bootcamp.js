@@ -1,7 +1,7 @@
 module.exports = function buildMakeBootcamp () {
   return function makeBootcamp ({
     name,
-    slug,
+    slugName,
     description,
     website,
     phone,
@@ -22,7 +22,7 @@ module.exports = function buildMakeBootcamp () {
   } = {}) {
     return Object.freeze({
       getName: () => name,
-      getSlug: () => slug,
+      getSlugName: () => slugName,
       getDescription: () => description,
       getWebsite: () => website,
       getPhone: () => phone,
