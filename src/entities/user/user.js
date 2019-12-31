@@ -2,6 +2,7 @@ module.exports = function buildMakeUser ({ jwt, bcrypt, crypto }) {
   return function makeUser ({
     id,
     name,
+    slugName,
     email,
     role,
     password,
@@ -13,6 +14,7 @@ module.exports = function buildMakeUser ({ jwt, bcrypt, crypto }) {
     return Object.freeze({
       getId: () => id,
       getName: () => name,
+      getSlugName: () => slugName,
       getEmail: () => email,
       getRole: () => role,
       getPassword: () => password,
