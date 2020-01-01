@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-
+const fileupload = require('express-fileupload');
+const path = require('path');
 const notFound = require('./controllers/not-found');
 const { makeHandlerCallback } = require('./helpers/express-callback');
 
@@ -27,6 +28,11 @@ app.use(
     extended: false
   })
 );
+// File uploading
+app.use(fileupload());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/pages'));
 app.use('/api/v1', require('./routes/api/v1'));

@@ -1,8 +1,8 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeGetUsers ({ userService }) {
-  return async function getUsers (httpRequest) {
-    const users = await userService.getUsers();
+module.exports = function makeGetBoocamps ({ bootcampService }) {
+  return async function getBoocamps (httpRequest) {
+    const bootcamps = await bootcampService.getBootcamps();
     return {
       headers: {
         'Content-Type': 'application/json'
@@ -10,7 +10,7 @@ module.exports = function makeGetUsers ({ userService }) {
       statusCode: 200,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: { users }
+        data: { bootcamps }
       }
     };
   };

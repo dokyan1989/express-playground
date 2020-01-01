@@ -1,5 +1,6 @@
 module.exports = function makeGetBootcampsInRadius ({ bootcampsDb }) {
-  return function getBootcampsInRadius () {
-
+  return async function getBootcampsInRadius ({ lng, lat, radius }) {
+    const bootcamps = await bootcampsDb.findInRadius({ lng, lat, radius });
+    return bootcamps;
   };
 };

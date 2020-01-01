@@ -1,14 +1,13 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeUpdateUser ({ userService }) {
-  return async function updateUser (httpRequest) {
-    const fieldsToUpdate = {
-      name: httpRequest.body.name,
-      email: httpRequest.body.email,
-      role: httpRequest.body.role
-    };
+module.exports = function makeUpdateBootcamp ({ bootcampService }) {
+  return async function updateBootcamp (httpRequest) {
+    const fieldsToUpdate = Object.assign({}, httpRequest.body);
 
-    const user = await userService.updateUser({ id: httpRequest.user._id, ...fieldsToUpdate });
+    Object.keys(fieldsToUpdate).forEach((key) =>
+      (fieldsToUpdate[key] === null || fieldsToUpdate[key] === undefined) && delete fieldsToUpdate[key]);
+
+    const bootcamp = await bootcampService.updateBootcamp({ user: httpRequest.user, id: httpRequest.params.id, ...fieldsToUpdate });
     return {
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +16,7 @@ module.exports = function makeUpdateUser ({ userService }) {
       statusCode: 201,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: { user }
+        data: { bootcamp }
       }
     };
   };

@@ -6,7 +6,7 @@ const makeGetBootcampsInRadius = require('./get-bootcamps-in-radius');
 const makeDeleteBootcamp = require('./delete-bootcamp');
 const makeUploadPhoto = require('./upload-photo');
 
-const bootcampsDb = require('../../data-access/mongoose/bootcampsDb');
+const bootcampsDb = require('../../data-access/mongoose/bootcamps');
 
 const createBootcamp = makeCreateBootcamp({ bootcampsDb });
 const updateBootcamp = makeUpdateBootcamp({ bootcampsDb });

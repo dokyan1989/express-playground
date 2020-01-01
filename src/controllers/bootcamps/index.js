@@ -1,23 +1,29 @@
-const userService = require('../../use-cases/user');
+const bootcampService = require('../../use-cases/bootcamp');
 
-const makeCreateUser = require('./create-user');
-const makeUpdateUser = require('./update-user');
-const makeDeleteUser = require('./delete-user');
-const makeGetUsers = require('./get-users');
-const makeGetUserById = require('./get-user-by-id');
+const makeCreateBootcamp = require('./create-bootcamp');
+const makeUpdateBootcamp = require('./update-bootcamp');
+const makeDeleteBootcamp = require('./delete-bootcamp');
+const makeGetBootcamps = require('./get-bootcamps');
+const makeGetBootcampById = require('./get-bootcamp-by-id');
+const makeGetBootcampsInRadius = require('./get-bootcamps-in-radius');
+const makeUploadPhoto = require('./upload-photo');
 
-const createUser = makeCreateUser({ userService });
-const updateUser = makeUpdateUser({ userService });
-const deleteUser = makeDeleteUser({ userService });
-const getUsers = makeGetUsers({ userService });
-const getUserById = makeGetUserById({ userService });
+const createBootcamp = makeCreateBootcamp({ bootcampService });
+const updateBootcamp = makeUpdateBootcamp({ bootcampService });
+const deleteBootcamp = makeDeleteBootcamp({ bootcampService });
+const getBootcamps = makeGetBootcamps({ bootcampService });
+const getBootcampById = makeGetBootcampById({ bootcampService });
+const getBootcampsInRadius = makeGetBootcampsInRadius({ bootcampService });
+const uploadPhoto = makeUploadPhoto({ bootcampService });
 
-const userController = Object.freeze({
-  createUser,
-  updateUser,
-  deleteUser,
-  getUsers,
-  getUserById
+const bootcampController = Object.freeze({
+  createBootcamp,
+  updateBootcamp,
+  deleteBootcamp,
+  getBootcamps,
+  getBootcampById,
+  getBootcampsInRadius,
+  uploadPhoto
 });
 
-module.exports = userController;
+module.exports = bootcampController;

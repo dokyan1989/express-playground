@@ -65,7 +65,7 @@ module.exports = function makeBootcampsDb ({ makeDb, slugify }) {
     if (!bootcamps) {
       return null;
     }
-    return bootcamps.toJSON();
+    return bootcamps;
   }
 
   async function insert ({ ...bootcampData } = {}) {
