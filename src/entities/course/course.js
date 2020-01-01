@@ -8,7 +8,8 @@ module.exports = function buildMakeCourse () {
     scholarshipAvailable,
     createdAt = Date.now(),
     updatedAt = Date.now(),
-    userId
+    userId,
+    bootcampId
   } = {}) {
     return Object.freeze({
       getTitle: () => title,
@@ -19,7 +20,8 @@ module.exports = function buildMakeCourse () {
       getScholarshipAvailable: () => scholarshipAvailable,
       getCreatedAt: () => createdAt,
       getUpdatedAt: () => updatedAt,
-      getUserId: () => userId
+      getUserId: () => userId,
+      getBootcampId: () => bootcampId
     });
   };
 };

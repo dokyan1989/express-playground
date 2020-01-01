@@ -3,20 +3,25 @@ const makeUpdateCourse = require('./update-course');
 const makeGetCourseById = require('./get-course-by-id');
 const makeGetCourses = require('./get-courses');
 const makeDeleteCourse = require('./delete-course');
-const coursesDb = require('../../data-access/mongoose/coursesDb');
+const makeGetCourseByBootcamp = require('./get-courses-by-bootcamp');
 
-const createCourse = makeCreateCourse({ coursesDb });
-const updateCourse = makeUpdateCourse({ coursesDb });
+const coursesDb = require('../../data-access/mongoose/courses');
+const bootcampsDb = require('../../data-access/mongoose/bootcamps');
+
+const createCourse = makeCreateCourse({ coursesDb, bootcampsDb });
+const updateCourse = makeUpdateCourse({ coursesDb, bootcampsDb });
 const getCourseById = makeGetCourseById({ coursesDb });
 const getCourses = makeGetCourses({ coursesDb });
 const deleteCourse = makeDeleteCourse({ coursesDb });
+const getCoursesByBootcamp = makeGetCourseByBootcamp({ coursesDb });
 
 const courseService = Object.freeze({
   createCourse,
   updateCourse,
   getCourseById,
   getCourses,
-  deleteCourse
+  deleteCourse,
+  getCoursesByBootcamp
 });
 
 module.exports = courseService;

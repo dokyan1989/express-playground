@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const errorHandler = require('../middleware/error-handler');
 
 const CourseSchema = new mongoose.Schema({
   title: {
@@ -51,11 +52,11 @@ const CourseSchema = new mongoose.Schema({
 CourseSchema.statics.getAverageCost = async function (bootcampId) {
   const obj = await this.aggregate([
     {
-      $match: { bootcamp: bootcampId }
+      $match: { bootcampId }
     },
     {
       $group: {
-        _id: '$bootcamp',
+        _id: '$bootcampId',
         averageCost: { $avg: '$tuition' }
       }
     }
@@ -72,12 +73,16 @@ CourseSchema.statics.getAverageCost = async function (bootcampId) {
 
 // Call getAverageCost after save
 CourseSchema.post('save', async function () {
-  await this.constructor.getAverageCost(this.bootcamp);
+  await this.constructor.getAverageCost(this.bootcampId);
 });
 
 // Call getAverageCost before remove
 CourseSchema.pre('remove', async function () {
-  await this.constructor.getAverageCost(this.bootcamp);
+  await this.constructor.getAverageCost(this.bootcampId);
 });
+
+CourseSchema.post('save', errorHandler);
+CourseSchema.post('findOne', errorHandler);
+CourseSchema.post('findOneAndUpdate', errorHandler);
 
 module.exports = mongoose.model('Course', CourseSchema);

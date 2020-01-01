@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const geocoder = require('../../../helpers/geocoder');
+const errorHandler = require('../middleware/error-handler');
 
 const BootcampSchema = new mongoose.Schema({
   name: {
@@ -154,5 +155,9 @@ BootcampSchema.virtual('courses', {
   foreignField: 'bootcamp',
   justOne: false
 });
+
+BootcampSchema.post('save', errorHandler);
+BootcampSchema.post('findOne', errorHandler);
+BootcampSchema.post('findOneAndUpdate', errorHandler);
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);

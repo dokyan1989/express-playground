@@ -28,14 +28,13 @@
 //   };
 // }
 
-function asyncHandler (controller) {
-  return (a, b) => {
-    controller(a, b)
-      .then(result => console.log(result))
-      .catch(error => console.log(error));
-  };
-};
+const redis = require('redis');
+const client = redis.createClient();
 
-async function sum (a, b) { return a + b; }
+client.on('error', function (err) {
+  console.log('Error ' + err);
+});
 
-asyncHandler(sum)(1, 2);
+client.rpush('list-key', 'item', redis.print);
+client.rpush('list-key', 'item2', redis.print);
+client.rpush('list-key', 'item', redis.print);

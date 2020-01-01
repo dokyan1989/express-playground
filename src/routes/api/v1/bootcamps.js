@@ -13,6 +13,11 @@ const {
 
 const { protect, authorize } = require('../../../middleware/auth');
 
+// Include other resource routers
+const courseRouter = require('./courses');
+// Re-route into other resource routers
+router.use('/:bootcampId/courses', courseRouter);
+
 router.get('/', makeHandlerCallback(getBootcamps));
 router.get('/:id', makeHandlerCallback(getBootcampById));
 router.get('/radius/:zipcode/:distance', makeHandlerCallback(getBootcampsInRadius));

@@ -76,7 +76,8 @@ module.exports = function makeBootcampsDb ({ makeDb, slugify }) {
 
   async function remove ({ id } = {}) {
     const db = await makeDb();
-    const bootcamp = await db.bootcamps.findByIdAndDelete(id);
+    const bootcamp = await db.bootcamps.findById(id);
+    await bootcamp.remove();
     return bootcamp;
   }
 
