@@ -5,7 +5,9 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
     findOne,
     insert,
     remove,
-    update
+    update,
+    getAverageRating,
+    findByBootcamp
   });
 
   async function findAll () {
@@ -44,6 +46,18 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
     return review.toJSON();
   }
 
+  async function findByBootcamp ({ bootcampId, selectFields = null } = {}) {
+    const db = await makeDb();
+    let query = db.reviews.find({ bootcampId });
+
+    if (selectFields && Array.isArray(selectFields) && selectFields.length > 0) {
+      query = query.select(selectFields.join(' '));
+    }
+
+    const reviews = await query;
+    return reviews;
+  }
+
   async function insert ({ ...reviewData } = {}) {
     const db = await makeDb();
     const review = await db.reviews.create({ ...reviewData });
@@ -69,5 +83,24 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
     }
 
     return review;
+  }
+
+  async function getAverageRating ({ bootcampId } = {}) {
+    const db = await makeDb();
+
+    const obj = await db.courses.aggregate([
+      {
+        $match: { bootcampId }
+      },
+      {
+        $group: {
+          _id: '$bootcampId',
+          averageRating: { $avg: '$rating' }
+        }
+      }
+    ]);
+
+    const averageRating = Math.ceil(obj[0].averageRating / 10) * 10;
+    return averageRating;
   }
 };

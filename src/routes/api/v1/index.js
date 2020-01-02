@@ -7,6 +7,6 @@ router.use('/comments', require('./comments'));
 router.use('/users', require('./users'));
 router.use('/bootcamps', require('./bootcamps'));
 router.use('/courses', require('./courses'));
-// router.use('/reviews', require('./reviews'));
+router.use('/reviews', require('./reviews'));
 
 module.exports = router;

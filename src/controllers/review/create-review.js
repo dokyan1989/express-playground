@@ -1,9 +1,10 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeCreateUser ({ userService }) {
-  return async function createUser (httpRequest) {
-    const { ...userData } = httpRequest.body;
-    const user = await userService.createUser(userData);
+module.exports = function makeCreateReview ({ reviewService }) {
+  return async function createReview (httpRequest) {
+    httpRequest.body.userId = httpRequest.user._id;
+    const { ...reviewData } = httpRequest.body;
+    const review = await reviewService.createReview(reviewData, httpRequest.user);
     return {
       headers: {
         'Content-Type': 'application/json',
@@ -12,7 +13,7 @@ module.exports = function makeCreateUser ({ userService }) {
       statusCode: 201,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: { user }
+        data: { review }
       }
     };
   };

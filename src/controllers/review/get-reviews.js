@@ -1,8 +1,13 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeGetUsers ({ userService }) {
-  return async function getUsers (httpRequest) {
-    const users = await userService.getUsers();
+module.exports = function makeGetReviews ({ reviewService }) {
+  return async function getReviews (httpRequest) {
+    let reviews = null;
+    if (httpRequest.params.bootcampId) {
+      reviews = await reviewService.getReviewsByBootcamp({ bootcampId: httpRequest.params.bootcampId });
+    } else {
+      reviews = await reviewService.getReviews();
+    }
     return {
       headers: {
         'Content-Type': 'application/json'
@@ -10,7 +15,7 @@ module.exports = function makeGetUsers ({ userService }) {
       statusCode: 200,
       body: {
         status: ResponseStatus.SUCCESS,
-        data: { users }
+        data: { reviews }
       }
     };
   };

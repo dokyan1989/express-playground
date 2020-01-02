@@ -1,5 +1,6 @@
 module.exports = function makeGetReviews ({ reviewsDb }) {
-  return function getReviews () {
-
+  return async function getReviews () {
+    const reviews = await reviewsDb.findAll();
+    return reviews;
   };
 };

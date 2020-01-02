@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const errorHandler = require('../middleware/error-handler');
 
 const ReviewSchema = new mongoose.Schema({
   title: {
@@ -44,11 +45,11 @@ ReviewSchema.index({ bootcamp: 1, user: 1 }, { unique: true });
 ReviewSchema.statics.getAverageRating = async function (bootcampId) {
   const obj = await this.aggregate([
     {
-      $match: { bootcamp: bootcampId }
+      $match: { bootcampId }
     },
     {
       $group: {
-        _id: '$bootcamp',
+        _id: '$bootcampId',
         averageRating: { $avg: '$rating' }
       }
     }
@@ -72,5 +73,9 @@ ReviewSchema.post('save', async function () {
 ReviewSchema.pre('remove', async function () {
   await this.constructor.getAverageRating(this.bootcamp);
 });
+
+ReviewSchema.post('save', errorHandler);
+ReviewSchema.post('findOne', errorHandler);
+ReviewSchema.post('findOneAndUpdate', errorHandler);
 
 module.exports = mongoose.model('Review', ReviewSchema);
