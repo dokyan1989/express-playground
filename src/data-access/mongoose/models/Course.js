@@ -67,7 +67,7 @@ CourseSchema.statics.getAverageCost = async function (bootcampId) {
       averageCost: Math.ceil(obj[0].averageCost / 10) * 10
     });
   } catch (err) {
-    console.err(err);
+    console.error(err);
   }
 };
 
@@ -77,7 +77,7 @@ CourseSchema.post('save', async function () {
 });
 
 // Call getAverageCost before remove
-CourseSchema.pre('remove', async function () {
+CourseSchema.post('remove', async function () {
   await this.constructor.getAverageCost(this.bootcampId);
 });
 

@@ -1,8 +1,8 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
-module.exports = function makeDeleteCourse ({ courseService }) {
-  return async function deleteCourse (httpRequest) {
-    const deleted = await courseService.deleteCourse({ user: httpRequest.user, id: httpRequest.params.id });
+module.exports = function makeDeleteReview ({ reviewService }) {
+  return async function deleteReview (httpRequest) {
+    const deleted = await reviewService.deleteReview({ user: httpRequest.user, id: httpRequest.params.id });
     return {
       headers: {
         'Content-Type': 'application/json'

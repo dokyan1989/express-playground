@@ -10,13 +10,13 @@ module.exports = function makeAddReview ({ reviewsDb, bootcampsDb }) {
 
     const review = makeReview(reviewData);
     const createdReview = await reviewsDb.insert({
-      title: review.getTitle,
-      text: review.getText,
-      rating: review.getRating,
-      createdAt: review.getCreatedAt,
-      updatedAt: review.getUpdatedAt,
-      bootcampId: review.getBootcampId,
-      userId: review.getUserId
+      title: review.getTitle(),
+      text: review.getText(),
+      rating: review.getRating(),
+      createdAt: review.getCreatedAt(),
+      updatedAt: review.getUpdatedAt(),
+      bootcampId: review.getBootcampId(),
+      userId: review.getUserId()
     });
     return createdReview;
   };

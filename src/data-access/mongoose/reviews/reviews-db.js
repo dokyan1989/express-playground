@@ -66,7 +66,8 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
 
   async function remove ({ id } = {}) {
     const db = await makeDb();
-    const review = await db.reviews.findByIdAndDelete(id);
+    const review = await db.reviews.findById(id);
+    await review.remove();
     return review;
   }
 
@@ -88,7 +89,7 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
   async function getAverageRating ({ bootcampId } = {}) {
     const db = await makeDb();
 
-    const obj = await db.courses.aggregate([
+    const obj = await db.reviews.aggregate([
       {
         $match: { bootcampId }
       },
@@ -100,7 +101,7 @@ module.exports = function makeReviewsDb ({ makeDb, slugify }) {
       }
     ]);
 
-    const averageRating = Math.ceil(obj[0].averageRating / 10) * 10;
+    const averageRating = obj[0].averageRating;
     return averageRating;
   }
 };

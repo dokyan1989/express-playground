@@ -1,11 +1,11 @@
-const makeCreateReview = require('./creat-review');
+const makeCreateReview = require('./create-review');
 const makeUpdateReview = require('./update-review');
 const makeGetReviewById = require('./get-review-by-id');
 const makeGetReviews = require('./get-reviews');
 const makeDeleteReview = require('./delete-review');
-const makeGetReviewByBootcamp = require('./get-reviews-by-bootcamp');
+const makeGetReviewsByBootcamp = require('./get-reviews-by-bootcamp');
 
-const reviewsDb = require('../../data-access/mongoose/reviewsDb');
+const reviewsDb = require('../../data-access/mongoose/reviews');
 const bootcampsDb = require('../../data-access/mongoose/bootcamps');
 
 const createReview = makeCreateReview({ reviewsDb, bootcampsDb });
@@ -13,7 +13,7 @@ const updateReview = makeUpdateReview({ reviewsDb, bootcampsDb });
 const getReviewById = makeGetReviewById({ reviewsDb });
 const getReviews = makeGetReviews({ reviewsDb });
 const deleteReview = makeDeleteReview({ reviewsDb });
-const getReviewByBootcamp = makeGetReviewByBootcamp({ reviewsDb });
+const getReviewsByBootcamp = makeGetReviewsByBootcamp({ reviewsDb });
 
 const reviewService = Object.freeze({
   createReview,
@@ -21,7 +21,7 @@ const reviewService = Object.freeze({
   getReviewById,
   getReviews,
   deleteReview,
-  getReviewByBootcamp
+  getReviewsByBootcamp
 });
 
 module.exports = reviewService;
