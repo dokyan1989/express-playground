@@ -11,9 +11,9 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
-const notFound = require('./controllers/not-found');
-const errorHandler = require('./middleware/error-handler');
-const { makeHandlerCallback } = require('./helpers/express-callback');
+const notFound = require('./src/controllers/not-found');
+const errorHandler = require('./src/middleware/error-handler');
+const { makeHandlerCallback } = require('./src/helpers/express-callback');
 
 dotenv.config();
 
@@ -76,8 +76,8 @@ app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routes
-app.use('/', require('./routes/pages'));
-app.use('/api/v1', require('./routes/api/v1'));
+app.use('/', require('./src/routes/pages'));
+app.use('/api/v1', require('./src/routes/api/v1'));
 app.use(makeHandlerCallback(notFound));
 app.use(errorHandler);
 

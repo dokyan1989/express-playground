@@ -5,7 +5,7 @@ module.exports = function makeGetCourseById ({ coursesDb }) {
     const foundCourse = await coursesDb.findById({ id });
 
     if (!foundCourse) {
-      throw new NotFoundError(`No course with the id of ${id}`, 'message');
+      throw new NotFoundError(`No course with the id of ${id}`);
     }
     return foundCourse;
   };

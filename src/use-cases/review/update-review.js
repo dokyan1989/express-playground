@@ -1,5 +1,5 @@
 const makeReview = require('../../entities/review');
-const { ValidationError, NotFoundError, NotAuthorizeError } = require('../../helpers/error-types');
+const { ValidationError, NotFoundError, UnauthorizedError } = require('../../helpers/error-types');
 
 module.exports = function makeUpdateReview ({ reviewsDb, bootcampsDb }) {
   return async function updateReview ({ user, id, ...changes } = {}) {
@@ -9,12 +9,12 @@ module.exports = function makeUpdateReview ({ reviewsDb, bootcampsDb }) {
 
     const foundReview = await reviewsDb.findById({ id });
     if (!foundReview) {
-      throw new NotFoundError(`Review not found with id of ${id}`, 'message');
+      throw new NotFoundError(`Review not found with id of ${id}`);
     }
 
     // Make sure user is review owner
     if (foundReview.userId.toString() !== user._id.toString() && user.role !== 'admin') {
-      throw new NotAuthorizeError(`User ${user._id} is not authorized to update this review`);
+      throw new UnauthorizedError(`User ${user._id} is not authorized to update this review`);
     }
 
     const review = makeReview({ ...foundReview, ...changes, updatedAt: undefined });

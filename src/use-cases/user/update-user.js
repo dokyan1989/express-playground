@@ -9,7 +9,7 @@ module.exports = function makeUpdateUser ({ usersDb }) {
 
     const foundUser = await usersDb.findById({ id });
     if (!foundUser) {
-      throw new NotFoundError('User not found.', 'message');
+      throw new NotFoundError('User not found');
     }
 
     const user = makeUser({ ...foundUser, ...changes, updatedAt: undefined });

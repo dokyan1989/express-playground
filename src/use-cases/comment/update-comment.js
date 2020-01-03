@@ -13,7 +13,7 @@ module.exports = function makeUpdateComment ({ commentsDb, handleModeration }) {
 
     const existing = await commentsDb.findById({ id });
     if (!existing) {
-      throw new NotFoundError('Comment not found.', 'comment');
+      throw new NotFoundError('Comment not found');
     }
 
     const comment = makeComment({ ...existing, ...changes, modifiedOn: undefined });

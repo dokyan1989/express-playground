@@ -1,22 +1,29 @@
 const ResponseStatus = require('../../constants/ResponseStatus');
 
 const errorHandler = (err, req, res, next) => {
-  res.set('Content-Type', 'application/json');
-  console.log(err);
   switch (err.name) {
     case 'ValidationError':
     case 'DuplicateError':
-    case 'NotFoundError':
-      res.status(400).send({
+      res.status(400).json({
         status: ResponseStatus.FAIL,
         data: {
-          [err.fieldName]: err.message
+          field: err.fieldName,
+          message: err.message
         }
       });
       break;
 
-    case 'NotAuthorizeError':
-      res.status(401).send({
+    case 'NotFoundError':
+      res.status(404).json({
+        status: ResponseStatus.FAIL,
+        data: {
+          message: err.message
+        }
+      });
+      break;
+
+    case 'UnauthorizedError':
+      res.status(401).json({
         status: ResponseStatus.FAIL,
         data: {
           message: err.message
@@ -25,7 +32,7 @@ const errorHandler = (err, req, res, next) => {
       break;
 
     default:
-      res.status(500).send({
+      res.status(500).json({
         status: ResponseStatus.ERROR,
         message: err.message
       });

@@ -8,7 +8,7 @@ module.exports = function makeDeleteHero ({ heroesDb }) {
 
     const deletedHero = await heroesDb.remove({ id });
     if (!deletedHero) {
-      throw new NotFoundError('Hero not found, nothing to delete.', 'message');
+      throw new NotFoundError('Hero not found, nothing to delete.');
     }
 
     return {

@@ -5,7 +5,7 @@ module.exports = function makeGetReviewById ({ reviewsDb }) {
     const foundReview = await reviewsDb.findById({ id });
 
     if (!foundReview) {
-      throw new NotFoundError(`No review with the id of ${id}`, 'message');
+      throw new NotFoundError(`No review with the id of ${id}`);
     }
     return foundReview;
   };

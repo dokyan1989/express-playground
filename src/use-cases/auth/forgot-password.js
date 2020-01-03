@@ -9,7 +9,7 @@ module.exports = function makeForgotPassword ({ usersDb }) {
     });
 
     if (!user) {
-      throw new NotFoundError('There is no user with that email', 'email');
+      throw new NotFoundError('There is no user with that email');
     }
 
     user = makeUser({ id: user._id, ...user });

@@ -10,7 +10,7 @@ module.exports = function makeResetPassword ({ usersDb }) {
       }
     });
     if (!foundUser) {
-      throw new NotFoundError('User not found. Invalid token.', 'message');
+      throw new NotFoundError('User not found. Invalid token.');
     }
 
     let updatedUser = await usersDb.update({

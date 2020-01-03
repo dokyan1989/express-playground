@@ -1,5 +1,5 @@
 const makeCourse = require('../../entities/course');
-const { ValidationError, NotFoundError, NotAuthorizeError } = require('../../helpers/error-types');
+const { ValidationError, NotFoundError, UnauthorizedError } = require('../../helpers/error-types');
 
 module.exports = function makeUpdateCourse ({ coursesDb, bootcampsDb }) {
   return async function updateCourse ({ user, id, ...changes } = {}) {
@@ -9,12 +9,12 @@ module.exports = function makeUpdateCourse ({ coursesDb, bootcampsDb }) {
 
     const foundCourse = await coursesDb.findById({ id });
     if (!foundCourse) {
-      throw new NotFoundError(`Course not found with id of ${id}`, 'message');
+      throw new NotFoundError(`Course not found with id of ${id}`);
     }
 
     // Make sure user is course owner
     if (foundCourse.userId.toString() !== user._id.toString() && user.role !== 'admin') {
-      throw new NotAuthorizeError(`User ${user._id} is not authorized to update this course`);
+      throw new UnauthorizedError(`User ${user._id} is not authorized to update this course`);
     }
 
     const course = makeCourse({ ...foundCourse, ...changes, updatedAt: undefined });

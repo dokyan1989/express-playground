@@ -5,7 +5,7 @@ module.exports = function makeGetHeroById ({ heroesDb }) {
     const foundHero = await heroesDb.findById({ id });
 
     if (!foundHero) {
-      throw new NotFoundError(`No hero with the id of ${id}`, 'message');
+      throw new NotFoundError(`No hero with the id of ${id}`);
     }
     return foundHero;
   };

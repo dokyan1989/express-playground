@@ -5,7 +5,7 @@ module.exports = function makeGetMe ({ usersDb }) {
     const foundUser = await usersDb.findById({ id });
 
     if (!foundUser) {
-      throw new NotFoundError(`No user with the id of ${id}`, 'message');
+      throw new NotFoundError(`No user with the id of ${id}`);
     }
     return foundUser;
   };

@@ -19,7 +19,7 @@ module.exports = function makeLogin ({ usersDb }) {
       selectFields: ['+password']
     });
     if (!user) {
-      throw new NotFoundError('Invalid credentials', 'message');
+      throw new NotFoundError('Invalid credentials');
     }
 
     user = makeUser({ id: user._id, ...user });

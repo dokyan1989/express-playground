@@ -1,4 +1,4 @@
-const { ValidationError, NotFoundError, NotAuthorizeError } = require('../../helpers/error-types');
+const { ValidationError, NotFoundError, UnauthorizedError } = require('../../helpers/error-types');
 
 module.exports = function makeDeleteReview ({ reviewsDb }) {
   return async function deleteReview ({ user, id } = {}) {
@@ -8,12 +8,12 @@ module.exports = function makeDeleteReview ({ reviewsDb }) {
 
     const foundReview = await reviewsDb.findById({ id });
     if (!foundReview) {
-      throw new NotFoundError(`Review not found with id of ${id}`, 'message');
+      throw new NotFoundError(`Review not found with id of ${id}`);
     }
 
     // Make sure user is review owner
     if (foundReview.userId.toString() !== user._id.toString() && user.role !== 'admin') {
-      throw new NotAuthorizeError(`User ${user._id} is not authorized to delete this review`);
+      throw new UnauthorizedError(`User ${user._id} is not authorized to delete this review`);
     }
 
     await reviewsDb.remove({ id });

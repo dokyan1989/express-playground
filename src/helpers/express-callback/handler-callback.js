@@ -32,8 +32,7 @@ module.exports = function makeHandlerCallback (controller) {
           });
         }
 
-        res.type('json');
-        res.status(httpResponse.statusCode).send(httpResponse.body);
+        res.status(httpResponse.statusCode).json(httpResponse.body);
       })
       .catch(error => next(error));
   };

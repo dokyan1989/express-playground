@@ -5,7 +5,7 @@ module.exports = function makeGetBootcampById ({ bootcampsDb }) {
     const foundBootcamp = await bootcampsDb.findById({ id });
 
     if (!foundBootcamp) {
-      throw new NotFoundError(`No bootcamp with the id of ${id}`, 'message');
+      throw new NotFoundError(`No bootcamp with the id of ${id}`);
     }
     return foundBootcamp;
   };

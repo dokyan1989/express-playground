@@ -1,4 +1,4 @@
-class NotAuthorizeError extends Error {
+class UnauthorizedError extends Error {
   constructor (message = 'Not authorize to access this route') {
     super();
     Error.captureStackTrace(this, this.constructor);
@@ -7,4 +7,4 @@ class NotAuthorizeError extends Error {
   }
 };
 
-module.exports = NotAuthorizeError;
+module.exports = UnauthorizedError;

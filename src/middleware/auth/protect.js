@@ -1,4 +1,4 @@
-const { NotAuthorizeError } = require('../../helpers/error-types');
+const { UnauthorizedError } = require('../../helpers/error-types');
 const ResponseStatus = require('../../constants/ResponseStatus');
 const jwt = require('jsonwebtoken');
 
@@ -17,7 +17,7 @@ module.exports = function makeProtect ({ userService }) {
 
     // Make sure token exists
     if (!token) {
-      throw new NotAuthorizeError();
+      throw new UnauthorizedError();
     }
 
     // Verify token

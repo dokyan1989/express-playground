@@ -8,7 +8,7 @@ module.exports = function makeDeleteUser ({ usersDb }) {
 
     const deletedUser = await usersDb.remove({ id });
     if (!deletedUser) {
-      throw new NotFoundError('User not found, nothing to delete.', 'message');
+      throw new NotFoundError('User not found, nothing to delete.');
     }
 
     return {

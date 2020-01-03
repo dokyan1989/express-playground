@@ -1,16 +1,16 @@
 const makeCourse = require('../../entities/course');
-const { NotFoundError, NotAuthorizeError } = require('../../helpers/error-types');
+const { NotFoundError, UnauthorizedError } = require('../../helpers/error-types');
 
 module.exports = function makeAddCourse ({ coursesDb, bootcampsDb }) {
   return async function addCourse (courseData, user) {
     const foundBootcamp = await bootcampsDb.findById({ id: courseData.bootcampId });
     if (!foundBootcamp) {
-      throw new NotFoundError(`Bootcamp not found with id of ${courseData.bootcampId}`, 'message');
+      throw new NotFoundError(`Bootcamp not found with id of ${courseData.bootcampId}`);
     }
 
     // Make sure user is bootcamp owner
     if (foundBootcamp.userId.toString() !== user._id.toString() && user.role !== 'admin') {
-      throw new NotAuthorizeError(`User ${user._id} is not authorized to add course to this bootcamp`);
+      throw new UnauthorizedError(`User ${user._id} is not authorized to add course to this bootcamp`);
     }
 
     const course = makeCourse(courseData);

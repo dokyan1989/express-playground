@@ -5,7 +5,7 @@ module.exports = function makeAddReview ({ reviewsDb, bootcampsDb }) {
   return async function addReview (reviewData) {
     const foundBootcamp = await bootcampsDb.findById({ id: reviewData.bootcampId });
     if (!foundBootcamp) {
-      throw new NotFoundError(`Bootcamp not found with id of ${reviewData.bootcampId}`, 'message');
+      throw new NotFoundError(`Bootcamp not found with id of ${reviewData.bootcampId}`);
     }
 
     const review = makeReview(reviewData);
