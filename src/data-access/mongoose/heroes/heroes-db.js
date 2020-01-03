@@ -30,7 +30,8 @@ module.exports = function makeHeroesDb ({ makeDb }) {
 
   async function remove ({ id }) {
     const db = await makeDb();
-    const hero = await db.heroes.findByIdAndDelete(id);
+    const hero = await db.heroes.findById(id);
+    await hero.remove();
     return hero;
   }
 

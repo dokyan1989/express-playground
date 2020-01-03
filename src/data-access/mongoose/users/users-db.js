@@ -52,7 +52,8 @@ module.exports = function makeUsersDb ({ makeDb, bcrypt, slugify }) {
 
   async function remove ({ id }) {
     const db = await makeDb();
-    const user = await db.users.findByIdAndDelete(id);
+    const user = await db.users.findById(id);
+    await user.remove();
     return user;
   }
 
