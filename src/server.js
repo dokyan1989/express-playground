@@ -1,13 +1,64 @@
 const express = require('express');
-const cors = require('cors');
 const fileupload = require('express-fileupload');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const dotenv = require('dotenv');
 const path = require('path');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const cors = require('cors');
+const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+
 const notFound = require('./controllers/not-found');
+const errorHandler = require('./middleware/error-handler');
 const { makeHandlerCallback } = require('./helpers/express-callback');
 
-require('dotenv').config();
+dotenv.config();
 
 const app = express();
+
+// Body Parser Middleware
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: false
+  })
+);
+
+// Cookie parser
+app.use(cookieParser());
+
+// Dev logging middleware
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// File uploading
+app.use(fileupload());
+
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS attacks
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 mins
+  max: 100
+});
+
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
+// Enable CORS
 const whitelist = ['http://localhost:4200', 'http://localhost:5000'];
 const corsOptions = {
   origin: (origin, callback) => {
@@ -21,23 +72,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Body Parser Middleware
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: false
-  })
-);
-// File uploading
-app.use(fileupload());
-
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Mount routes
 app.use('/', require('./routes/pages'));
 app.use('/api/v1', require('./routes/api/v1'));
 app.use(makeHandlerCallback(notFound));
-app.use(require('./middleware/error-handler'));
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(
