@@ -2,12 +2,14 @@ const ResponseStatus = require('../../constants/ResponseStatus');
 
 module.exports = function makeGetCourses ({ courseService }) {
   return async function getCourses (httpRequest) {
-    let courses = null;
+    const queryParams = httpRequest.query;
+
     if (httpRequest.params.bootcampId) {
-      courses = await courseService.getCoursesByBootcamp({ bootcampId: httpRequest.params.bootcampId });
-    } else {
-      courses = await courseService.getCourses();
+      queryParams.bootcampId = httpRequest.params.bootcampId;
     }
+
+    const courses = await courseService.getCourses({ queryParams });
+
     return {
       headers: {
         'Content-Type': 'application/json'

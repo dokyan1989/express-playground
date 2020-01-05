@@ -46,6 +46,9 @@ const CourseSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   }
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 // Static method to get avg of course tuitions
@@ -79,6 +82,21 @@ CourseSchema.post('save', async function () {
 // Call getAverageCost before remove
 CourseSchema.post('remove', async function () {
   await this.constructor.getAverageCost(this.bootcampId);
+});
+
+// Reverse populate with virtuals
+CourseSchema.virtual('users', {
+  ref: 'User',
+  localField: 'userId',
+  foreignField: '_id',
+  justOne: false
+});
+
+CourseSchema.virtual('bootcamps', {
+  ref: 'Bootcamp',
+  localField: 'bootcampId',
+  foreignField: '_id',
+  justOne: false
 });
 
 CourseSchema.post('save', errorHandler);

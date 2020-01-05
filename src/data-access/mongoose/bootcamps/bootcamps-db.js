@@ -23,7 +23,7 @@ module.exports = function makeBootcampsDb ({ makeDb, slugify }) {
       query = query.select(selectFields.join(' '));
     }
 
-    const bootcamp = await query;
+    const bootcamp = await query.populate('courses');
     if (!bootcamp) {
       return null;
     }
